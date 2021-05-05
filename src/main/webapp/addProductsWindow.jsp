@@ -27,7 +27,7 @@
 
 <div class="container" id="addProductContainer">
     Lägg till artikel:
-    <form action="addProductsWindow.jsp">
+    <form action="<%=request.getContextPath()%>/addProductController" method="GET">
         <div class="row align-items-start">
             <div class="col">
                 <input type="text" name="ean" class="form-control" placeholder="EAN">
