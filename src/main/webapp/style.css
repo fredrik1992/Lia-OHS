@@ -79,6 +79,7 @@ input:checked + .slider:before {
 #addProductButton {
     background-color: #161D6F;
     color: #E1F3FA;
+    min-width: 135px;
 }
 
 #addProductAttributeDropdown {
@@ -95,4 +96,20 @@ input:checked + .slider:before {
 
 #addProductAttributeDropdown:focus {
     box-shadow: 0 0 0 .25rem #bbd4f7;
+}
+
+.show {
+    background-color: #f3fdff;
+}
+
+.show > li {
+    border-bottom: solid 1px #e6eae9;
+
+
+}
+
+.show > li > label {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
 }
