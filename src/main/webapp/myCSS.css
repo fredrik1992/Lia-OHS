@@ -1,0 +1,22 @@
+.body {
+    background-color: #F6F6F6;
+}
+.dash {
+    background-color: #F44336 !important;
+    color:  #E1F3FA !important;
+}
+
+.lists{
+    background-color: #FCECDD !important;
+    color: #161D6F !important;
+
+}
+
+.input{
+    display: none;
+}
+
+
+.displayInput{
+    display: inline-block;
+}
