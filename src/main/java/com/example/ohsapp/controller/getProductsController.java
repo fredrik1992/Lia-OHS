@@ -1,4 +1,4 @@
-package controller;
+package com.example.ohsapp.controller;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
