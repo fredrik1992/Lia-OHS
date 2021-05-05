@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
-<form>
+<form action="/test">
 <div class="row g-3">
     <div class="col-sm-3">
         <input type="text" class="form-control" placeholder="EAN" name="ean">
