@@ -1,4 +1,4 @@
-package beans;
+package com.example.ohsapp.beans;
 
 public class ProduktBean {
    String articleNumber,name,eanNumber,tradeMark,inPrice,outPrice;
