@@ -26,25 +26,25 @@
         <h1>sök på artikel</h1>
         <%-- make a serch trough javascript that gets it from the listbean  --%>
 
-
+        <% out.print(request.getContextPath());%>
         <form action="<%=request.getContextPath()%>/getProductsController" class = "searchProductContainer">
             <div class="form-group inputField">
 
-                <input type="text" class="form-control" id="eanSearch" name="ean" aria-describedby="emailHelp" placeholder="Ean">
+                <input type="text" class="form-control" id="eanSearch" aria-describedby="emailHelp" placeholder="Ean">
 
             </div>
             <div class="form-group inputField">
 
-                <input type="text" class="form-control" name="article" id="articleSearch" aria-describedby="emailHelp" placeholder="AtrikelNummer">
+                <input type="text" class="form-control" id="articleSearch" aria-describedby="emailHelp" placeholder="AtrikelNummer">
 
             </div>
             <div class="form-group inputField">
 
-                <input type="text" class="form-control" name="productName" id="productSearch" aria-describedby="emailHelp" placeholder="ProduktNamn">
+                <input type="text" class="form-control" id="productSearch" aria-describedby="emailHelp" placeholder="ProduktNamn">
 
             </div>
             <%-- skicka till controllerec2-user@ec2-3-250-53-125.eu-west-1.compute.amazonaws.com --%>
-            <button type="submit" class="btn btn-primary submitButton">sök</button>
+            <button type="submit" class="btn btn-primary submitButton" onclick="searchForProduct(document.getElementById('eanSearch').value,document.getElementById('articleSearch').value,document.getElementById('productSearch').value)">sök</button>
 
 
 
@@ -60,38 +60,29 @@
 
             <div class="productContainer">
                 <div class="containerItemName">
-                    <form action="<%=request.getContextPath()%>/getProductFromEan">
-                        <input type="hidden" name="hiddenEan" value="7854">
-                        <button type="submit"class="list-group btn itemNameButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Ketchup 1000g</button>
-                    </form>
-
-
+                    <button type="button"class="list-group btn itemNameButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Ketchup 1000g</button>
                     <%--maby hidden element that contains the ean code here --%>
                 </div>
 
                 <form class="inputForm">
-                    <input type="hidden" name="hiddenProductName" value="Ketchup 1000g">
-                    <input type="hidden" name="hiddenEanCode" value="7854">
-
                     <div class="form-group inputFormItemContainer">
                         <h2 class="packageSizeName" >DFP(128)</h2>
-                        <input type="text" class="form-control inputFormItem" name="DFP" id="bigPack" aria-describedby="emailHelp" >
+                        <input type="email" class="form-control inputFormItem" id="bigPack" aria-describedby="emailHelp" >
 
                     </div>
 
                     <div class="form-group inputFormItemContainer">
                         <h2 class="packageSizeName">KFP(12)</h2>
-                        <input type="text" class="form-control inputFormItem" name="KFP" id="smallPack" aria-describedby="emailHelp" >
+                        <input type="email" class="form-control inputFormItem" id="smallPack" aria-describedby="emailHelp" >
 
                     </div>
                     <h2 class="containerItemLager">Lager:10</h2>
-                    <button class="articleFormSubmit" onclick="addToShoopingCart(this.form)"></button>
+                    <button class="articleFormSubmit"></button>
 
 
 
 
                 </form>
-
 
 
             </div>
@@ -107,8 +98,6 @@
                     </div>
 
                     <form class="inputForm">
-                        <input type="hidden" name="hiddenProductName" value="Ketchup felix 1000g">
-                        <input type="hidden" name="hiddenEanCode" value="1234567">
                         <div class="form-group inputFormItemContainer">
                             <h2 class="packageSizeName" >DFP(128)</h2>
                             <input type="email" class="form-control inputFormItem" id="bigPack" aria-describedby="emailHelp" >
@@ -121,7 +110,7 @@
 
                         </div>
                         <h2 class="containerItemLager">Lager:10</h2>
-                        <button class="articleFormSubmit" onclick="addToShoopingCart(this.form)"></button>
+                        <button class="articleFormSubmit"></button>
 
 
 
@@ -129,15 +118,13 @@
                     </form>
 
 
-
                 </div>
-                <jsp:include page="orderWindowShoopingcartModal.jsp"></jsp:include>
-                <button type="submit"class="list-group btn itemNameButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="createProductContainersInShoopingcart()" >Ketchup 1000g</button>
-
-<div id="testy">
 
 
-</div>
+
+
+
+        </div>
 
 <script>
     let myModal = document.getElementById('myModal')

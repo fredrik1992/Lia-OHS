@@ -1,59 +1,90 @@
 console.log("script loaded")
+let shoppingCart = [];
 
 
 //function that  trys to take an argument from input field and check what to saerch for
-function searchForProduct (ean,article,product){
-let generatedProductList;
- if(ean.length !=0){//checks wich input has been filled
 
-     generatedproductList = getProductContainersList(ean,"eanNumber")
-    createProductsContainer(generatedProductList)// creates containers from a generated list
 
- }else if (article.length !=0){
 
-     generatedproductList = getProductContainersList(article,"articleNumber")
-     createProductsContainer(generatedProductList)
-
- }else if (product.length !=0){
-
-     generatedProductList =  getProductContainersList(product,"productName")
-     createProductsContainer(generatedProductList)
-
- }else(console.log("no input was given try again"))
-
-}
-
-function getProductContainersList(searchValue,typeValue){
-    //var procutListToShow = []
-    if(typeValue == "eanNumber"){
-        /*for(i=0;i<allProducts.length;i++){
-           if( allProducts[i].getEan == searchvalue){
-            productListToShow.push(allProducts[i])
-           }
-           return productListToShow
-
-        */
-    }else if(typeValue == "articleNumber"){
-        /*for(i=0;i<allProducts.length;i++){
-          if( allProducts[i].getArticleNumber == searchvalue){
-           productListToShow.push(allProducts[i])
-          }
-
-       */
-    }else if (typeValue == "productName"){
-        /*for(i=0;i<allProducts.length;i++){
-         if( allProducts[i].getName == searchvalue){
-          productListToShow.push(allProducts[i])
-         }
-
-      */
-    }
-
-}
 
 function createProductsContainer(listOfProducts){
 
 }
+
+
+function addToShoopingCart(form){
+    event.preventDefault();
+    let productName = form.hiddenProductName.value;
+    let eanCode = form.hiddenEanCode.value;
+    let dfpValue = form.DFP.value;
+    let kfp = form.KFP.value;
+
+
+    let produktObject = {
+        name:productName ,
+        ean:eanCode,
+        dfp:dfpValue,
+        kfp:kfp
+    }
+
+    shoppingCart.push(produktObject); //devider between values
+
+
+
+
+
+}
+function createProductContainersInShoopingcart(){
+    var elements = document.querySelectorAll('.cartItemBox');
+    for (var element of elements) {
+        element.remove();
+
+    }//removes all elements before adding again
+
+    let targetModal = document.getElementById("shoppingCartBody");
+    for (i=0;i<shoppingCart.length;i++){
+        let container = document.createElement("div");
+        container.classList.add("cartItemBox")
+
+        let productNameBox =document.createElement("div")
+        productNameBox.classList.add("cartItem")
+
+
+        let productName =document.createElement("h2")
+        productName.innerText = shoppingCart[i].name;
+        productNameBox.appendChild(productName)
+
+        let productDFPBox =document.createElement("div")
+        productDFPBox.classList.add("cartItem")
+
+        let productDFP =document.createElement("h2")
+        productDFP.innerText = "DFP:" + shoppingCart[i].dfp;
+        productDFPBox.appendChild(productDFP)
+
+        let productKFPBox =document.createElement("div")
+        productKFPBox.classList.add("cartItem")
+
+        let productKFP =document.createElement("h2")
+        productKFP.innerText = "KFP:" + shoppingCart[i].kfp;
+        productKFPBox.appendChild(productKFP)
+
+
+
+
+        container.appendChild(productNameBox);
+        container.appendChild(productDFPBox);
+        container.appendChild(productKFPBox);
+        targetModal.appendChild(container)
+    }
+
+}
+
+function callTest(){
+    alert("in test")
+    console.log("test")
+    $.post("/testa");
+}
+
 
 
 //eventlistener when page is loaded to see if any products have been loaded
