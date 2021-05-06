@@ -27,6 +27,8 @@ public class addProductController {
                        @RequestParam(name = "larmad") String alarmed,
                        @RequestParam(name = "activeproduct") String activeproduct) {
 
+
+
         String sqlQuery = "INSERT INTO `products` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 
