@@ -1,5 +1,7 @@
 package com.example.ohsapp.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/addProductController")
 public class addProductController {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @GetMapping
     public String test(@RequestParam(name = "ean") String ean,
@@ -28,6 +33,13 @@ public class addProductController {
                        @RequestParam(name = "activeproduct") String activeproduct) {
 
 
+        String sql = "INSERT INTO suppliers (Name, Mail, PhoneNumber) VALUES (?, ?, ?)";
+
+        int result = jdbcTemplate.update(sql, "ICA", "ica@mail.com", "1234567890");
+
+        if (result > 0) {
+            System.out.println("A new row has been inserted.");
+        }
 
         String sqlQuery = "INSERT INTO `products` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
