@@ -3,7 +3,7 @@
 
 <div class="container" id="addProductContainer">
     Sök artikel:
-    <form action="<%=request.getContextPath()%>/test" method="GET">
+    <form action="<%=request.getContextPath()%>/getProductsController" method="GET">
         <div class="row align-items-start">
             <div class="col">
                 <input type="text" class="form-control" placeholder="EAN" name="ean">
