@@ -26,11 +26,11 @@ public class addProductController {
                        @RequestParam(name = "maxstockbalance") String maxStockBalance,
                        @RequestParam(name = "stockbalance") String stockBalance,
                        @RequestParam(name = "category") String category,
-                       @RequestParam(name = "18plus") String eighteenPlus,
-                       @RequestParam(name = "pant1kr") String pant1Kr,
-                       @RequestParam(name = "pant2kr") String pant2Kr,
-                       @RequestParam(name = "larmad") String alarmed,
-                       @RequestParam(name = "activeproduct") String activeproduct) {
+                       @RequestParam(required = false,name = "18plus") String eighteenPlus,
+                       @RequestParam(required = false,name = "pant1kr") String pant1Kr,
+                       @RequestParam(required = false,name = "pant2kr") String pant2Kr,
+                       @RequestParam(required = false,name = "larmad") String alarmed,
+                       @RequestParam(required = false,name = "activeproduct") String activeproduct){
 
 
         String sql = "INSERT INTO suppliers (Name, Mail, PhoneNumber) VALUES (?, ?, ?)";
