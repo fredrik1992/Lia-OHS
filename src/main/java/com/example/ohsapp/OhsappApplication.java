@@ -16,8 +16,5 @@ public class OhsappApplication {
 
 
 
-    @GetMapping
-    public String hello(){
-        return "hello";
-    }
+
 }
