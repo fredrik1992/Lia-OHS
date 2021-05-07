@@ -53,14 +53,14 @@
         <jsp:include page="orderWindowModal.jsp"></jsp:include>
 
 
-
+        <div id="productsContainer">
         <div class="productsWindow" >
 
 
 
             <div class="productContainer">
                 <div class="containerItemName">
-                    <form action="<%=request.getContextPath()%>/getProductFromEan">
+                    <form >
                         <input type="hidden" name="hiddenEan" value="7854">
                         <button type="submit"class="list-group btn itemNameButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Ketchup 1000g</button>
                     </form>
@@ -75,7 +75,7 @@
 
                     <div class="form-group inputFormItemContainer">
                         <h2 class="packageSizeName" >DFP(128)</h2>
-                        <input type="text" class="form-control inputFormItem" name="DFP" id="bigPack" aria-describedby="emailHelp" >
+                        <input type="text" class="form-control inputFormItem" name="DFP" id="bigPack" >
 
                     </div>
 
@@ -96,7 +96,7 @@
 
             </div>
 
-            <div class="productsWindow" >
+            <div class="productsWindow" id="productsWindow">
 
 
 
@@ -131,6 +131,7 @@
 
 
                 </div>
+            </div>
                 <jsp:include page="orderWindowShoopingcartModal.jsp"></jsp:include>
                 <button type="submit"class="list-group btn itemNameButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="createProductContainersInShoopingcart()" >Ketchup 1000g</button>
 

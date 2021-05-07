@@ -32,7 +32,7 @@ public class GetProductsController {
 
 
     }
-    @RequestMapping(path = "/getProductFromEan")
+    @RequestMapping(path = "/getProductFromEan")//ta bort
     public String singleEanHandler(@RequestParam(name = "hiddenEan") String hiddenEan){
         // takes care of finding a matching ean number in database and returns it
         //using existing methods
@@ -50,7 +50,7 @@ public class GetProductsController {
         //checks wich of the three inputs to use and the target column in database
         if(ean.length() !=0){//checks wich input has been filled
             inputDataToUse =ean;
-            return "EAN-Number"; // this is the column name we will be using
+            return "EANNumber"; // this is the column name we will be using
 
         }else if (article.length() !=0){
             inputDataToUse =article;
@@ -68,7 +68,7 @@ public class GetProductsController {
     }
     private void addProducts(ProduktListBean produktListBean,
                              String inputData,String searchTarget){
-
+        //call quarry return result
 
 
     }
