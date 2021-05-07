@@ -1,3 +1,3 @@
 FROM openjdk:11
-ADD target/ohsapp.jar ohsapp.jar
-ENTRYPOINT ["java","-jar","ohsapp.jar"]
+ADD target/ohsapp.war ohsapp.war
+ENTRYPOINT ["java","-jar","ohsapp.war"]
