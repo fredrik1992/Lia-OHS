@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProduktListBean {
-    List <ProduktBean> allOrders = new ArrayList<>();
+    List <ProduktBean> allOrders;
 
     public ProduktListBean() {
-
+        allOrders = new ArrayList<>();
     }
 
     public List<ProduktBean> getAllOrders() {

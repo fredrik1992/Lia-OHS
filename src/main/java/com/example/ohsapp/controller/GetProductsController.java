@@ -1,77 +1,113 @@
 package com.example.ohsapp.controller;
 
+import com.example.ohsapp.beans.ProduktBean;
 import com.example.ohsapp.beans.ProduktListBean;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.PreparedStatement;
-import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
-@RestController
+@Controller
+@ControllerAdvice
 
 public class GetProductsController {
     private String inputDataToUse;
+    ProduktListBean produktListBean = new ProduktListBean();
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
 
-    @RequestMapping(path = "/getProductsController")
-    public String multibleInputHandler(@RequestParam(name = "ean") String ean,
-                          @RequestParam(name = "article") String article,
-                          @RequestParam(name = "productName") String productName){
+    @RequestMapping(value = "/getProductsController", method = RequestMethod.GET)
+    public void multibleInputHandler(HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "ean") String ean,
+                                     @RequestParam(name = "article") String article,
+                                     @RequestParam(name = "productName") String productName) throws ServletException, IOException {
 
-        String searchQueryTarget = findRelevantInput(ean,article,productName);
+        String searchQuery = findRelevantQuery(ean, article, productName);
 
-        if(searchQueryTarget != null){
-            ProduktListBean produktListBean = new ProduktListBean();
-            addProducts(produktListBean,inputDataToUse,searchQueryTarget);
-            //send it back to site
-            return "orderWindow";
+        if (searchQuery != null) {
+
+            addProductsCall(produktListBean, inputDataToUse, searchQuery);
+
+            //return produktListBean.getAllOrders().get(0).getName();//send it back to site
         }
-        return "no input";
-        //go back to site
+
+        HttpSession session = request.getSession();
+        session.setAttribute("test", produktListBean);
+        RequestDispatcher rd = request.getRequestDispatcher("orderWindow.jsp");
+        rd.forward(request, response);
 
 
     }
-    @RequestMapping(path = "/getProductFromEan")//ta bort
-    public String singleEanHandler(@RequestParam(name = "hiddenEan") String hiddenEan){
-        // takes care of finding a matching ean number in database and returns it
-        //using existing methods
-        ProduktListBean produktListBean = new ProduktListBean();
-        if(hiddenEan.isEmpty()){
-            return "empty";
-        }else {
-            //needs to return the list of products to the page
-            addProducts(produktListBean,hiddenEan,"EAN-Number");
-            return "not empty";
-        }
-    }
-
-    private String findRelevantInput (String ean,String article, String productName){
-        //checks wich of the three inputs to use and the target column in database
-        if(ean.length() !=0){//checks wich input has been filled
-            inputDataToUse =ean;
-            return "EANNumber"; // this is the column name we will be using
-
-        }else if (article.length() !=0){
-            inputDataToUse =article;
-            return "ArticleNumber";
 
 
-        }else if (article.length() !=0){
-            inputDataToUse =productName;
-            return "Name";
+    private String findRelevantQuery(String ean, String article, String productName) {
+        //checks wich Querry to use
+        if (ean.length() != 0) {//checks wich input has been filled
+            inputDataToUse = ean;
+            String sqlQuerry = "SELECT * FROM products WHERE EANNumber = ?";
+            return sqlQuerry; // this is the column name we will be using
+
+        } else if (article.length() != 0) {
+            inputDataToUse = article;
+            String sqlQuerry = "SELECT * FROM products WHERE ArticleNumber = ?";
+            return sqlQuerry;
 
 
-        }else{
+        } else if (productName.length() != 0) {
+            inputDataToUse = productName;
+            String sqlQuerry = "SELECT * FROM products WHERE Name = ?";
+            System.out.print(productName);
+            System.out.print(sqlQuerry);
+            return sqlQuerry;
+
+
+        } else {
             return null;
         }
     }
-    private void addProducts(ProduktListBean produktListBean,
-                             String inputData,String searchTarget){
-        //call quarry return result
 
+    private void addProductsCall(ProduktListBean produktListBean,
+                                 String inputData, String sqlQuerry) {
+
+
+        jdbcTemplate.query(
+                sqlQuerry, new Object[]{inputData},
+                (rs, rowNum) -> new ProduktBean(rs.getString("ArticleNumber"), rs.getString("Name"), // maby check mapping here ?
+                        rs.getString("EANNumber"), rs.getString("Trademark"), rs.getInt("InPrice"),
+                        rs.getInt("OutPrice"))
+        ).forEach(product ->
+                produktListBean.addProduct(product)
+        );
 
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

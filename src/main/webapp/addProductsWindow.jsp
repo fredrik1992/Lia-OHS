@@ -25,9 +25,13 @@
 <body>
 <jsp:include page="dashBoard.jsp"></jsp:include>
 <div class="container" id="addProductContainer">
-    <% String fa = (String) request.getAttribute("fa"); %>
+    <h1><%
 
-    <h2><%= fa%></h2>
+        String addProductProcess = (String) request.getAttribute("addProductProcess");
+        if(addProductProcess != null){
+            out.println(addProductProcess);
+        }
+    %> </h1>
     Lägg till artikel:
     <form action="<%=request.getContextPath()%>/addProductController" method="POST">
         <div class="row align-items-start">
@@ -91,7 +95,7 @@
                 <div class="float-end">
                     Aktiv
                     <label class="switch">
-                        <input type="checkbox" name="activeproduct">
+                        <input type="hidden" name="activeproduct" value="0"><input type="checkbox" onclick="this.previousSibling.value=1-this.previousSibling.value">
                         <span class="slider round"></span>
                     </label>
                 </div>

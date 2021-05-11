@@ -1,3 +1,5 @@
+<%@ page import="com.example.ohsapp.beans.ProduktListBean" %>
+<%@ page import="com.example.ohsapp.beans.ProduktBean" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -136,6 +138,17 @@
                 <button type="submit"class="list-group btn itemNameButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="createProductContainersInShoopingcart()" >Ketchup 1000g</button>
 
 <div id="testy">
+
+
+    <h1>Welcome to <%
+
+        ProduktListBean test = (ProduktListBean) session.getAttribute("test");
+        if(test != null){
+            for (ProduktBean p : test.getAllOrders()){
+                out.print(p.getName());
+            }
+        }
+         %> </h1>
 
 
 </div>
