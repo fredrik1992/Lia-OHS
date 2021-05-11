@@ -24,10 +24,12 @@
 </head>
 <body>
 <jsp:include page="dashBoard.jsp"></jsp:include>
-
 <div class="container" id="addProductContainer">
+    <% String fa = (String) request.getAttribute("fa"); %>
+
+    <h2><%= fa%></h2>
     Lägg till artikel:
-    <form action="<%=request.getContextPath()%>/addProductController" method="GET">
+    <form action="<%=request.getContextPath()%>/addProductController" method="POST">
         <div class="row align-items-start">
             <div class="col">
                 <input type="text" name="ean" class="form-control" placeholder="EAN">
