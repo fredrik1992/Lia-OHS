@@ -2,6 +2,7 @@ console.log("script loaded")
 let shoppingCart = [];
 
 
+
 //function that  trys to take an argument from input field and check what to saerch for
 
 
