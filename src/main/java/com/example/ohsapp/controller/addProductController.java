@@ -35,7 +35,7 @@ public class addProductController {
 
         String sql = "INSERT INTO suppliers (Name, Mail, PhoneNumber) VALUES (?, ?, ?)";
 
-        int result = jdbcTemplate.update(sql, "ICA", "ica@mail.com", "1234567890");
+        int result = jdbcTemplate.update(sql, "ICA", "ica@maill.com", "1234567890");
 
         if (result > 0) {
             System.out.println("A new row has been inserted.");
