@@ -3,15 +3,18 @@ package com.example.ohsapp.beans;
 public class UserBean {
 
 
+
     private String name;
     private String employeeId;
-    private boolean admin;
+    private String admin;
+    private boolean checkAdmin = false;
 
-    public UserBean(String name, String employeeId) {
+    public UserBean(String name, String employeeId,String admin) {
         this.name = name;
         this.employeeId = employeeId;
-
+        this.admin = admin;
     }
+
 
     public String getName() {
         return name;
@@ -29,11 +32,13 @@ public class UserBean {
         this.employeeId = employeeId;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public boolean isCheckAdmin() {
+        return checkAdmin;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void initiateCheckAdmin() {
+        if(this.admin.equals("1")){
+            this.checkAdmin = true;
+        }
     }
 }
