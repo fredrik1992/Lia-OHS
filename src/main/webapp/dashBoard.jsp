@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link dash" href="/onePage.jsp">Sök artikel</a>
+                    <a class="nav-link dash" href="/searchWindow.jsp">Sök artikel</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link dash" href="/orderWindow.jsp">Beställningar</a>
