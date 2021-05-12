@@ -1,28 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
-
-<div class="container" id="addProductContainer">
-    Sök artikel:
-    <form action="<%=request.getContextPath()%>/getProductsController" method="GET">
-        <div class="row align-items-start">
-            <div class="col">
-                <input type="text" class="form-control" placeholder="EAN" name="ean">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="ArtickelNr" name="artikelNr">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Namn" name="namn">
-            </div>
-            <div class="col">
-                <div class="float-end">
-                    <input type="submit" value="Lägg till" class="btn btn-primary" id="addProductButton"/>
-                </div>
-            </div>
-        </div>
-    </form>
-
-
+<form>
+<div class="row g-3">
+    <div class="col-sm-3">
+        <input type="text" class="form-control" placeholder="EAN" name="ean">
+    </div>
+    <div class="col-sm">
+        <input type="text" class="form-control" placeholder="ArtikelNr" name="artikelNr">
+    </div>
+    <div class="col-sm">
+        <input type="text" class="form-control" placeholder="Namn" name="namn">
+    </div>
+    <div>
+    <input class="btn btn-primary" type="submit" value="Submit">
+    </div>
+</div>
+</form>
 
 <%
     //for (Product p : products){
@@ -34,7 +27,7 @@
                 +"</ul>");
    // }
 %>
-</div>
+
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">

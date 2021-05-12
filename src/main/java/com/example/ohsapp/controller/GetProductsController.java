@@ -54,7 +54,6 @@ public class GetProductsController {
 
         }else if (article.length() !=0){
             inputDataToUse =article;
-
             return "ArticleNumber";
 
 
