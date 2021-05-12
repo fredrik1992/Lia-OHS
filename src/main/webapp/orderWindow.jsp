@@ -20,15 +20,13 @@
 
 <jsp:include page="dashBoard.jsp"></jsp:include>
 
-<main>
+<main class="container">
     <%--  add so that a servelet is called that gets all the orders and add them to orderlistbean then get them here
  so that you cant use javascript to create dynamic windows ina a nice list--%>
 
     <div class="headContainer" >
-        <h1>sök på artikel</h1>
+        <p>sök på artikel</p>
         <%-- make a serch trough javascript that gets it from the listbean  --%>
-
-
         <form action="<%=request.getContextPath()%>/getProductsController" class = "searchProductContainer">
             <div class="form-group inputField">
 
@@ -46,120 +44,86 @@
 
             </div>
             <%-- skicka till controllerec2-user@ec2-3-250-53-125.eu-west-1.compute.amazonaws.com --%>
-            <button type="submit" class="btn btn-primary submitButton">sök</button>
+            <div class="col">
+                <div class="float-end">
+
+                    <button type="submit" class="btn btn-outline-primary  submitButton">sök</button>
+                </div>
+            </div>
+
 
 
 
         </form>
     </div>
-        <jsp:include page="orderWindowModal.jsp"></jsp:include>
+
 
 
         <div id="productsContainer">
-        <div class="productsWindow" >
 
+            <%
 
+                    ProduktListBean test = (ProduktListBean) session.getAttribute("test");
+                    if(test != null){
+                        for (ProduktBean p : test.getAllOrders()){
+                            out.print("<div class=\"productsWindow\" >" +
+                                    "<div class=\"productContainer\">" +
+                                    "<div class=\"containerItemName\">" +
+                                    "<form class=\"inputForm\">"+
+                                    "<input name = \"articleNum\" type = \"hidden\" value = \""+p.getArticleNumber()+"\">"+
+                                    "<input name = \"attribute\" type = \"hidden\" value = \""+p.getAttribute()+"\">"+
+                                    "<input name = \"ean\" type = \"hidden\" value = \""+p.getEanNumber()+"\">"+
+                                    "<input name = \"department\" type = \"hidden\" value = \""+p.getDepartment()+"\">"+
+                                    "<input name = \"name\" type = \"hidden\" value = \""+p.getName()+"\">"+
+                                    "<input name = \"category\" type = \"hidden\" value = \""+p.getCategory()+"\">"+
+                                    "<input name = \"tradeMark\" type = \"hidden\" value = \""+p.getTradeMark()+"\">"+
+                                    "<input name = \"inPrice\" type = \"hidden\" value = \""+p.getInPrice()+"\">"+
+                                    "<input name = \"outPrice\" type = \"hidden\" value = \""+p.getOutPrice()+"\">"+
+                                    "<input name = \"activeProduct\" type = \"hidden\" value = \""+p.getActiveProduct()+"\">"+
+                                    "<input name = \"balance\" type = \"hidden\" value = \""+p.getStockBalance()+"\">"+
+                                    "<input name = \"supplier\" type = \"hidden\" value = \""+p.getSupplierId()+"\">"+
+                                    "<input name = \"maxStock\" type = \"hidden\" value = \""+p.getMaxStockBalance()+"\">"+
+                                    "<input name = \"minStock\" type = \"hidden\" value = \""+p.getMinStockBalance()+"\">"+
+                                    "<button  class=\"list-group btn itemNameButton\" onClick = \"showAttributes(this.form)\">"+ p.getName() +"</button>" +
+                                    "</form>"+
+                                    "</div>" +
+                                    "<form class=\"inputForm\">" +
+                                    "<input type=\"hidden\" name=\"hiddenProductName\" value=\""+p.getName()+"\">" +
+                                    " <input type=\"hidden\" name=\"hiddenArticleNum\" value=\""+p.getArticleNumber()+"\">" +
+                                    " <div class=\"form-group inputFormItemContainer\">" +
+                                    " <h2 class=\"packageSizeName\" >DFP(128)</h2>" +
+                                    "<input type=\"text\" class=\"form-control inputFormItem\" name=\"DFP\" id=\"bigPack\" >" +
+                                    "</div>" +
+                                    "<div class=\"form-group inputFormItemContainer\">" +
+                                    "<h2 class=\"packageSizeName\">KFP(12)</h2>" +
+                                    "<input type=\"text\" class=\"form-control inputFormItem\" name=\"KFP\" id=\"smallPack\" aria-describedby=\"emailHelp\" >" +
+                                    "</div>" +
+                                    "<h2 class=\"containerItemLager\">Lager:10</h2>" +
+                                    "<button class=\"btn btn-outline-primary  submitButton\" onclick=\"addToShoopingCart(this.form)\">Add</button>"+
+                                    "</form>" +
+                                    "</div>" +
+                                    "</div>");
 
-            <div class="productContainer">
-                <div class="containerItemName">
-                    <form >
-                        <input type="hidden" name="hiddenEan" value="7854">
-                        <button type="submit"class="list-group btn itemNameButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Ketchup 1000g</button>
-                    </form>
-
-
-                    <%--maby hidden element that contains the ean code here --%>
-                </div>
-
-                <form class="inputForm">
-                    <input type="hidden" name="hiddenProductName" value="Ketchup 1000g">
-                    <input type="hidden" name="hiddenEanCode" value="7854">
-
-                    <div class="form-group inputFormItemContainer">
-                        <h2 class="packageSizeName" >DFP(128)</h2>
-                        <input type="text" class="form-control inputFormItem" name="DFP" id="bigPack" >
-
-                    </div>
-
-                    <div class="form-group inputFormItemContainer">
-                        <h2 class="packageSizeName">KFP(12)</h2>
-                        <input type="text" class="form-control inputFormItem" name="KFP" id="smallPack" aria-describedby="emailHelp" >
-
-                    </div>
-                    <h2 class="containerItemLager">Lager:10</h2>
-                    <button class="articleFormSubmit" onclick="addToShoopingCart(this.form)"></button>
-
-
-
-
-                </form>
-
-
-
+                        }
+                    }
+                %>
             </div>
+        <jsp:include page="orderWindowModal.jsp"></jsp:include>
+        <jsp:include page="orderWindowShoopingcartModal.jsp"></jsp:include>
 
-            <div class="productsWindow" id="productsWindow">
 
 
-
-                <div class="productContainer">
-                    <div class="containerItemName">
-                        <button type="button"class="list-group btn itemNameButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Ketchup felix 1000g</button>
-                        <%--maby hidden element that contains the ean code here --%>
-                    </div>
-
-                    <form class="inputForm">
-                        <input type="hidden" name="hiddenProductName" value="Ketchup felix 1000g">
-                        <input type="hidden" name="hiddenEanCode" value="1234567">
-                        <div class="form-group inputFormItemContainer">
-                            <h2 class="packageSizeName" >DFP(128)</h2>
-                            <input type="email" class="form-control inputFormItem" id="bigPack" aria-describedby="emailHelp" >
-
-                        </div>
-
-                        <div class="form-group inputFormItemContainer">
-                            <h2 class="packageSizeName">KFP(12)</h2>
-                            <input type="email" class="form-control inputFormItem" id="smallPack" aria-describedby="emailHelp" >
-
-                        </div>
-                        <h2 class="containerItemLager">Lager:10</h2>
-                        <button class="articleFormSubmit" onclick="addToShoopingCart(this.form)"></button>
+        <button class="btn btn-outline-primary  submitButton" onclick="createProductContainersInShoopingcart()">Cart</button>
 
 
 
 
-                    </form>
 
 
 
-                </div>
-            </div>
-                <jsp:include page="orderWindowShoopingcartModal.jsp"></jsp:include>
-                <button type="submit"class="list-group btn itemNameButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclick="createProductContainersInShoopingcart()" >Ketchup 1000g</button>
-
-<div id="testy">
 
 
-    <h1>Welcome to <%
 
-        ProduktListBean test = (ProduktListBean) session.getAttribute("test");
-        if(test != null){
-            for (ProduktBean p : test.getAllOrders()){
-                out.print(p.getName());
-            }
-        }
-         %> </h1>
-
-
-</div>
-
-<script>
-    let myModal = document.getElementById('myModal')
-let myInput = document.getElementById('myInput')
-
-myModal.addEventListener('shown.bs.modal', function () {
-    myInput.focus()
-}) </script>
 
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
