@@ -111,9 +111,9 @@
         <jsp:include page="orderWindowModal.jsp"></jsp:include>
         <jsp:include page="orderWindowShoopingcartModal.jsp"></jsp:include>
 
+
+
         <button class="btn btn-outline-primary  submitButton" onclick="createProductContainersInShoopingcart()">Cart</button>
-
-
 
 
 
