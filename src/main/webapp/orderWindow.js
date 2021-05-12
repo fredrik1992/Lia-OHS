@@ -3,111 +3,55 @@ let shoppingCart = [];
 
 
 
+
 //function that  trys to take an argument from input field and check what to saerch for
 
 
 
+function showAttributes(form){
+    event.preventDefault();
+    console.log("staticBackdrop")
+    $('#staticBackdrop').modal("show")
 
-function createProductsContainer(listOfProducts){ // called when page is loaded
-    let productsFromDatabase =[];
-
-    for(i = 0;i<productsFromDatabase.length;i++){
-        let productsWindow = document.createElement("div");
-        productsWindow.classList.add("productsWindow")
-
-        //product Container
-        let productContainer = document.createElement("div");
-        productContainer.classList.add("productContainer")
-        productsWindow.append(productContainer)
-
-        let itemNameContainer = document.createElement("div");
-        itemNameContainer.classList.add("containerItemName");
-        productContainer.append(itemNameContainer);
-
-        let getProductDataForm = document.createElement("form");
-        itemNameContainer.append(getProductDataForm);
-
-        let hiddenEanInput = document.createElement("input");
-        hiddenEanInput.type = "hidden";
-        hiddenEanInput.name = "hiddenEan";
-        hiddenEanInput.value = productsFromDatabase[i].ean;
-        getProductDataForm.append(hiddenEanInput);
-
-        let submitButton = document.createElement("button");
-        submitButton.type = "submit";
-        submitButton.classList.add("list-group btn itemNameButton");
-        // have to check this submitButton.data-bs-toggle ="modal";
-        submitButton.value = productsFromDatabase[i].name;
-        itemNameContainer.append(submitButton);
-
-
-        //product container end
-
-        //inputForm
-        let inputForm = document.createElement("form");
-        inputForm.classList.add("inputForm");
-        productsWindow.append(inputForm)
-
-        let inputProductName = document.createElement("input");
-        inputProductName.type ="hidden";
-        inputProductName.name ="hiddenProductName";
-        inputProductName.value = productsFromDatabase[i].name;
-        inputForm.append(inputProductName);
-
-        let inputEanCode = document.createElement("input");
-        inputProductName.type ="hidden";
-        inputProductName.name ="hiddenEanCode";
-        inputProductName.value = productsFromDatabase[i].ean;
-        inputForm.append(inputEanCode);
-
-        //dfp
-        let dfpContainer = document.createElement("div");
-        dfpContainer.classList.add("form-group inputFormItemContainer");
-        inputForm.append(dfpContainer);
-
-        let dfpName = document.createElement("h2")
-        dfpName.classList.add("packageSizeName");
-        dfpName.innerText = "DFP(128)";
-        dfpContainer.append(dfpName);
-
-        let inputDfp = document.createElement("input");
-        inputDfp.type = "text";
-        inputDfp.classList.add("form-control inputFormItem");
-        inputDfp.name = "DFP";
-        inputDfp.id = "bigPack";
-        dfpContainer.append(inputDfp)
-        //dfp
-
-        //kfp
-
-        let kfpContainer = document.createElement("div");
-        kfpContainer.classList.add("form-group inputFormItemContainer");
-        inputForm.append(kfpContainer);
-
-        let kfpName = document.createElement("h2")
-        kfpName.classList.add("packageSizeName");
-        kfpName.innerText = "KFP(128)";
-        kfpContainer.append(kfpName);
-
-        let inputKfp = document.createElement("input");
-        inputKfp.type = "text";
-        inputDfp.classList.add("form-control inputFormItem");
-        inputDfp.name = "DFP";
-        inputDfp.id = "bigPack";
-        dfpContainer.append(inputDfp)
-
-
-    }
+let articleNum = form.articleNum.value;
+let attribute = form.attribute.value;
+let ean = form.ean.value;
+let department = form.department.value;
+let name = form.name.value;
+let category = form.category.value;
+let inPrice = form.inPrice.value;
+let tradeMark = form.tradeMark.value;
+let outPrice = form.outPrice.value;
+let activeProduct = form.activeProduct.value;
+let balance = form.balance.value;
+let supplier = form.supplier.value;
+let maxStock = form.maxStock.value;
+let minStock = form.minStock.value;
+document.getElementById("attributeModalArticle").innerText = articleNum;
+document.getElementById("attributeModalAttribute").innerText = attribute;
+document.getElementById("attributeModalEan").innerText = ean;
+document.getElementById("attributeModalDepartment").innerText = department;
+document.getElementById("attributeModalNamn").innerText = name;
+document.getElementById("attributeModalCategory").innerText = category;
+document.getElementById("attributeModalInPrice").innerText = inPrice;
+document.getElementById("attributeModalBrand").innerText = tradeMark;
+document.getElementById("attributeModalOutPrice").innerText = outPrice;
+document.getElementById("attributeModalActive").innerText = activeProduct;
+document.getElementById("attributeModalBalance").innerText = balance;
+document.getElementById("attributeModalSupplier").innerText = supplier;
+document.getElementById("attributeModalMaxStock").innerText = maxStock;
+document.getElementById("attributeModalMinStock").innerText = minStock;
 
 
 
 }
 
 
+
 function addToShoopingCart(form){
     event.preventDefault();
     let productName = form.hiddenProductName.value;
-    let eanCode = form.hiddenEanCode.value;
+    let articleNum = form.hiddenArticleNum.value;
     let dfpValue = form.DFP.value;
     let kfp = form.KFP.value;
     if(dfpValue == "" && kfp == ""){// if no orders have been put don't save
@@ -124,7 +68,7 @@ function addToShoopingCart(form){
 
     let produktObject = {
         name:productName ,
-        ean:eanCode,
+        ean:articleNum,
         dfp:dfpValue,
         kfp:kfp
     }
@@ -137,13 +81,14 @@ function addToShoopingCart(form){
 
 }
 function createProductContainersInShoopingcart(){
+    $('#testModal').modal("show")
     var elements = document.querySelectorAll('.cartItemBox');
     for (var element of elements) {
         element.remove();
 
     }//removes all elements before adding again
 
-    let targetModal = document.getElementById("shoppingCartBody");
+    let targetModal = document.getElementById("modal-body-cart");
     for (i=0;i<shoppingCart.length;i++){
         let container = document.createElement("div");
         container.classList.add("cartItemBox")
@@ -181,15 +126,30 @@ function createProductContainersInShoopingcart(){
 
 }
 
-function callTest(){// ta bort ?
-    alert("in test")
-    console.log("test")
-    $.post("/testa");
-}
 
-function getProduktDataFromSession(form){
-    //gewt the ean here and pupulate modal with the data  from sessiosn that matches ean
-}
+function saveOrder(){
+    
+    let arrayOfOrders = [];
 
-//eventlistener when page is loaded to see if any products have been loaded
-//function to remove all containers and functions
+    for(let i = 0;i<shoppingCart.length;i++){
+        let name =shoppingCart[i].name;
+        let ean =shoppingCart[i].ean;
+        let dfp =shoppingCart[i].dfp;
+        let kfp =shoppingCart[i].kfp;
+        arrayOfOrders.push(
+
+                name,ean,dfp,kfp,"$"
+
+
+
+
+        )
+    }
+    console.log(arrayOfOrders)
+    let allOrders = JSON.stringify(arrayOfOrders);
+    console.log(allOrders);
+  document.getElementById("123").value = allOrders;
+
+
+
+}

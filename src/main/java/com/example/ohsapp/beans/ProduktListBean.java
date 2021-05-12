@@ -18,4 +18,7 @@ public class ProduktListBean {
 
         allOrders.add(orderProduktBean);
     }
+    public void nullList(){
+        allOrders = new ArrayList<>();
+    }
 }
