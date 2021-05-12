@@ -1,8 +1,11 @@
 .headContainer{
     background-color: #F6F6F6;
     width: 100%;}
-main{
+body{
     background-color: #F6F6F6;
+}
+main{
+
 }
 .inputField{
     width: 25%;
@@ -17,7 +20,7 @@ main{
 
 }
 .submitButton{
-    height: 40%;
+
 }
 .productsWindow{
 
@@ -95,4 +98,9 @@ margin-bottom: 5px;
     display: flex;
     flex-direction: row;
     margin-right: 10%;
+}
+
+.attributeModalItem{
+    display: flex;
+    flex-direction: row;
 }
