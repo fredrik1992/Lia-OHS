@@ -24,6 +24,9 @@
                 <li class="nav-item">
                     <a class="nav-link dash" href="/statisticsWindow.jsp">Statistik</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link dash" href="/adminWindow.jsp">Admin</a>
+                </li>
             </ul>
         </div>
     </div>

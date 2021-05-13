@@ -25,7 +25,7 @@ public class addProductController {
     @RequestMapping(path = "/addProductController", method = RequestMethod.POST)
     public void addProductHandler(HttpServletRequest request, HttpServletResponse response,
                                   @RequestParam(name = "ean") String ean,
-                                  @RequestParam(name = "articlenumber") String articleMumber,
+                                  @RequestParam(name = "articleNumber") String articleNumber,
                                   @RequestParam(name = "trademark") String trademark,
                                   @RequestParam(name = "name") String name,
                                   @RequestParam(name = "inprice") String inPrice,
@@ -51,38 +51,33 @@ public class addProductController {
 
         String attributeSql = "INSERT INTO `attributeproducts` (ArticleNumber, AttributeId) VALUES (?,?)";
 
-        String sqlCheckIfPEanExists = "SELECT EANNUMBER FROM `products` WHERE EANNUMBER = '" + ean + "'";
-        Map checkIfEanExists = (DataAccessUtils.singleResult(jdbcTemplate.queryForList(sqlCheckIfPEanExists)));
+        String sqlCheckIfEanExists = "SELECT EANNUMBER FROM `products` WHERE EANNUMBER = '" + ean + "'";
+        Map checkIfEanExists = (DataAccessUtils.singleResult(jdbcTemplate.queryForList(sqlCheckIfEanExists)));
 
-        String sqlCheckIfPArticleNumberExists = "SELECT ArticleNumber FROM `products` WHERE ArticleNumber = '" + articleMumber + "'";
-        Map checkIfArticleNumberExists = (DataAccessUtils.singleResult(jdbcTemplate.queryForList(sqlCheckIfPArticleNumberExists)));
+        String sqlCheckIfArticleNumberExists = "SELECT ArticleNumber FROM `products` WHERE ArticleNumber = '" + articleNumber + "'";
+        Map checkIfArticleNumberExists = (DataAccessUtils.singleResult(jdbcTemplate.queryForList(sqlCheckIfArticleNumberExists)));
 
         if (checkIfEanExists != null || checkIfArticleNumberExists != null) {
             request.setAttribute("addProductProcess", "0");
         } else {
             try {
-                System.out.println(activeProduct);
-                int result = jdbcTemplate.update(sql, articleMumber, ean, trademark, inPrice, outPrice, stockBalance, maxStockBalance, minStockBalance,
+                int result = jdbcTemplate.update(sql, articleNumber, ean, trademark, inPrice, outPrice, stockBalance, maxStockBalance, minStockBalance,
                         kfpSize, dfpSize, department, category, activeProduct, name, "1");
 
                 if (result > 0) {
 
                     // Only inserts attribute if the product were successfully inserted.
                     if (eighteenPlus != null) {
-                        jdbcTemplate.update(attributeSql, articleMumber, "1");
-                        System.out.println("18 är inte empty");
+                        jdbcTemplate.update(attributeSql, articleNumber, "1");
                     }
                     if (pant1Kr != null) {
-                        jdbcTemplate.update(attributeSql, articleMumber, "2");
-                        System.out.println("1 är inte empty");
+                        jdbcTemplate.update(attributeSql, articleNumber, "2");
                     }
                     if (pant2Kr != null) {
-                        jdbcTemplate.update(attributeSql, articleMumber, "3");
-                        System.out.println("2 är inte empty");
+                        jdbcTemplate.update(attributeSql, articleNumber, "3");
                     }
                     if (alarmed != null) {
-                        jdbcTemplate.update(attributeSql, articleMumber, "4");
-                        System.out.println("alarm är inte empty");
+                        jdbcTemplate.update(attributeSql, articleNumber, "4");
                     }
 
                     System.out.println("A new row has been inserted.");

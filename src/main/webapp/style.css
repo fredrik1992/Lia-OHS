@@ -72,11 +72,11 @@ input:checked + .slider:before {
 
 
 
-#addProductContainer {
+#addContainer {
     margin-top: 10px;
 }
 
-#addProductButton {
+#addButton {
     background-color: #161D6F;
     color: #E1F3FA;
     min-width: 135px;

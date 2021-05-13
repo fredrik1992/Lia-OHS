@@ -32,7 +32,7 @@
         </symbol>
     </svg>
 
-    <title>Lägg till vara</title>
+    <title>Admin sida</title>
 </head>
 <body>
 
@@ -42,7 +42,7 @@
 
 <main class="container" id="addContainer">
     <%
-        String addProductProcess = (String) request.getAttribute("addProductProcess");
+        String addProductProcess = (String) request.getAttribute("addUserProcess");
         String alertClassName = "alert-danger";
         String alertMessage = "Något gick fel.";
         String alertIcon = "#exclamation-triangle-fill";
@@ -50,10 +50,10 @@
         if (addProductProcess != null) {
             if (addProductProcess.equals("1")) {
                 alertClassName = "alert-success";
-                alertMessage = "Produkten har lagts till.";
+                alertMessage = "Användaren har lagts till.";
                 alertIcon = "#check-circle-fill";
             } else if (addProductProcess.equals("0")) {
-                alertMessage = "Det finns redan en produkt med detta EAN eller Artikel nummer.";
+                alertMessage = "Det finns redan en användare med detta anställningsnummer eller användarnamn.";
             }
 
             out.println("<div class=\"alert " + alertClassName + " d-flex align-items-center\" role = \"alert\">");
@@ -66,75 +66,36 @@
             out.println("</div >");
         }
     %>
-    Lägg till artikel:
-    <form action="<%=request.getContextPath()%>/addProductController" method="POST">
+    Lägg till användare:
+    <form action="<%=request.getContextPath()%>/adminController" method="POST">
         <div class="row align-items-start">
             <div class="col">
-                <input type="text" name="ean" class="form-control" placeholder="EAN" required>
-            </div>
-            <div class="col">
-                <input type="text" name="articlenumber" class="form-control" placeholder="Artikelnummer" required>
+                <input type="text" name="employmentnumber" class="form-control" placeholder="Anställningsnummer"
+                       required>
             </div>
             <div class="col">
                 <input type="text" name="name" class="form-control" placeholder="Namn" required>
             </div>
             <div class="col">
-                <input type="text" name="trademark" class="form-control" placeholder="Varumärke" required>
+                <input type="text" name="mail" class="form-control" placeholder="Mail" required>
+            </div>
+            <div class="col">
+                <input type="text" name="phonenumber" class="form-control" placeholder="Telefon" required>
             </div>
         </div>
         <div class="row align-items-center">
             <div class="col">
-                <input type="text" name="inprice" class="form-control" placeholder="Inpris" required>
+                <input type="text" name="username" class="form-control" placeholder="Användarnamn" required>
             </div>
             <div class="col">
-                <input type="text" name="outprice" class="form-control" placeholder="Utpris" required>
-            </div>
-            <div class="col">
-                <input type="text" name="kfpsize" class="form-control" placeholder="KRP Storlek" required>
-            </div>
-            <div class="col">
-                <input type="text" name="dfpsize" class="form-control" placeholder="DFP Storlek" required>
-            </div>
-        </div>
-        <div class="row align-items-center">
-            <div class="col">
-                <input type="text" name="minstockbalance" class="form-control" placeholder="Min i lager" required>
-            </div>
-            <div class="col">
-                <input type="text" name="maxstockbalance" class="form-control" placeholder="Max i lager" required>
-            </div>
-            <div class="col">
-                <input type="text" name="stockbalance" class="form-control" placeholder="Antal i lager" required>
-            </div>
-            <div class="col">
-                <input type="text" name="department" class="form-control" placeholder="Avdelning" required>
-            </div>
-        </div>
-        <div class="row align-items-end">
-            <div class="col">
-                <input type="text" name="category" class="form-control" placeholder="Kategori" required>
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="addProductAttributeDropdown"
-                        data-bs-toggle="dropdown" aria-expanded="false">Attribut
-                </button>
-                <ul class="dropdown-menu">
-                    <li><label class="form-check-label">18+ <input type="checkbox" class="form-check-input"
-                                                                   name="18plus"></label></li>
-                    <li><label class="form-check-label">Pant 1kr <input type="checkbox" class="form-check-input"
-                                                                        name="pant1kr"></label></li>
-                    <li><label class="form-check-label">Pant 2kr <input type="checkbox" class="form-check-input"
-                                                                        name="pant2kr"></label></li>
-                    <li><label class="form-check-label">Larmad <input type="checkbox" class="form-check-input"
-                                                                      name="larmad"></label></li>
-                </ul>
+                <input type="text" name="password" class="form-control" placeholder="Lösenord" required>
             </div>
             <div class="col">
                 <div class="float-end">
-                    Aktiv
+                    Admin konto
                     <label class="switch">
-                        <input type="hidden" name="activeproduct" value="0"><input type="checkbox"
-                                                                                   onclick="this.previousSibling.value=1-this.previousSibling.value">
+                        <input type="hidden" name="isadmin" value="0"><input type="checkbox"
+                                                                             onclick="this.previousSibling.value=1-this.previousSibling.value">
                         <span class="slider round"></span>
                     </label>
                 </div>
