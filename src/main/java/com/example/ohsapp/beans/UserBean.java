@@ -1,30 +1,19 @@
 package com.example.ohsapp.beans;
 
 public class UserBean {
-    private String employmentNumber, username, password, name, phoneNumber, email, isAdmin;
+    private String employeeId;
+    private String name;
+    private String mail;
+    private String phoneNumber;
+    private String userName;
+    private String password;
+    private boolean admin;
 
-    public String getEmploymentNumber() {
-        return employmentNumber;
-    }
+    public UserBean(String name, String employeeId) {
+        this.name = name;
+        this.employeeId = employeeId;
 
-    public void setEmploymentNumber(String employmentNumber) {
-        this.employmentNumber = employmentNumber;
-    }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getName() {
@@ -35,6 +24,31 @@ public class UserBean {
         this.name = name;
     }
 
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -43,19 +57,19 @@ public class UserBean {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getIsAdmin() {
-        return isAdmin;
+    public String getPassword() {
+        return password;
     }
 
-    public void setIsAdmin(String isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

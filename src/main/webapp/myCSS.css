@@ -19,4 +19,5 @@
 
 .displayInput{
     display: inline-block;
+    float: right;
 }

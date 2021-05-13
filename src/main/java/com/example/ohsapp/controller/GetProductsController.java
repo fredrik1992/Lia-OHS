@@ -31,14 +31,14 @@ public class GetProductsController {
     public void multibleInputHandler(HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "ean") String ean,
                                      @RequestParam(name = "article") String article,
                                      @RequestParam(name = "productName") String productName) throws ServletException, IOException {
-
+        produktListBean.nullList();
         String searchQuery = findRelevantQuery(ean, article, productName);
 
         if (searchQuery != null) {
 
             addProductsCall(produktListBean, inputDataToUse, searchQuery);
 
-            //return produktListBean.getAllOrders().get(0).getName();//send it back to site
+
         }
 
         HttpSession session = request.getSession();
@@ -82,9 +82,12 @@ public class GetProductsController {
 
         jdbcTemplate.query(
                 sqlQuerry, new Object[]{inputData},
-                (rs, rowNum) -> new ProduktBean(rs.getString("ArticleNumber"), rs.getString("Name"), // maby check mapping here ?
-                        rs.getString("EANNumber"), rs.getString("Trademark"), rs.getInt("InPrice"),
-                        rs.getInt("OutPrice"))
+                (rs, rowNum) -> new ProduktBean(rs.getString("ArticleNumber"),rs.getString("EANNumber"),
+                        rs.getString("Trademark"),rs.getDouble("InPrice"),rs.getDouble("OutPrice"),
+                        rs.getInt("StockBalance"),rs.getInt("MaxStockBalance"),rs.getInt("MinStockBalance"),
+                        rs.getInt("KfpSize"),rs.getInt("DfpSize"),rs.getString("Department"),
+                        rs.getString("Category"),rs.getString("Attribute"),rs.getInt("ActiveProduct"),
+                        rs.getString("Name"),rs.getInt("SupplierId"))
         ).forEach(product ->
                 produktListBean.addProduct(product)
         );
