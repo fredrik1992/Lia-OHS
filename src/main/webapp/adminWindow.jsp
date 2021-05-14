@@ -17,8 +17,8 @@
     <!--Fontawesome CDN-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href="myCSS.css">
-    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="Css/myCSS.css">
+    <link href="Css/style.css" rel="stylesheet">
 
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -35,7 +35,15 @@
     <title>Admin sida</title>
 </head>
 <body>
+<%
+    // New location to be redirected
+    if (session.getAttribute("user") == null) {
+        String site = new String("index.html");
+        response.setStatus(response.SC_MOVED_TEMPORARILY);
+        response.setHeader("Location", site);
+    }
 
+%>
 <header>
     <jsp:include page="dashBoard.jsp"></jsp:include>
 </header>
@@ -66,48 +74,139 @@
             out.println("</div >");
         }
     %>
-    Lägg till användare:
-    <form action="<%=request.getContextPath()%>/adminController" method="POST">
-        <div class="row align-items-start">
-            <div class="col">
-                <input type="text" name="employmentnumber" class="form-control" placeholder="Anställningsnummer"
-                       required>
-            </div>
-            <div class="col">
-                <input type="text" name="name" class="form-control" placeholder="Namn" required>
-            </div>
-            <div class="col">
-                <input type="text" name="mail" class="form-control" placeholder="Mail" required>
-            </div>
-            <div class="col">
-                <input type="text" name="phonenumber" class="form-control" placeholder="Telefon" required>
-            </div>
-        </div>
-        <div class="row align-items-center">
-            <div class="col">
-                <input type="text" name="username" class="form-control" placeholder="Användarnamn" required>
-            </div>
-            <div class="col">
-                <input type="text" name="password" class="form-control" placeholder="Lösenord" required>
-            </div>
-            <div class="col">
-                <div class="float-end">
-                    Admin konto
-                    <label class="switch">
-                        <input type="hidden" name="isadmin" value="0"><input type="checkbox"
-                                                                             onclick="this.previousSibling.value=1-this.previousSibling.value">
-                        <span class="slider round"></span>
-                    </label>
+
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Lägg till användare
+                </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                 data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+
+                    Lägg till användare:
+                    <form name="addUserForm" action="<%=request.getContextPath()%>/adminAddUser"
+                          onsubmit="return passValidation()"
+                          method="POST">
+                        <div class="row align-items-start">
+                            <div class="col">
+                                <input type="text" name="employmentnumber" class="form-control"
+                                       placeholder="Anställningsnummer"
+                                       required>
+                            </div>
+                            <div class="col">
+                                <input type="text" name="name" class="form-control" placeholder="Namn" required>
+                            </div>
+                            <div class="col">
+                                <input type="text" name="mail" class="form-control" placeholder="Mail" required min="6">
+                            </div>
+                            <div class="col">
+                                <input type="text" name="phonenumber" class="form-control" placeholder="Telefon"
+                                       required minlength="10"
+                                       maxlength="10">
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <input type="text" name="username" class="form-control" placeholder="Användarnamn"
+                                       required
+                                       minlength="2">
+                            </div>
+                            <div class="col">
+                                <input type="password" name="password" class="form-control" placeholder="Lösenord"
+                                       required
+                                       minlength="8">
+                            </div>
+                            <div class="col">
+                                <input type="password" name="retypePassword" class="form-control"
+                                       placeholder="Lösenord igen" required
+                                       minlength="8">
+                            </div>
+                            <div class="col">
+                                <div class="float-end">
+                                    Admin konto
+                                    <label class="switch">
+                                        <input type="hidden" name="isadmin" value="0"><input type="checkbox"
+                                                                                             onclick="this.previousSibling.value=1-this.previousSibling.value">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="submit" value="Lägg till" class="btn btn-primary" id="addButton"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
-            <div class="col">
-                <div class="float-end">
-                    <input type="submit" value="Lägg till" class="btn btn-primary" id="addButton"/>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Ta bort användare
+                </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                 data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+
+
+                    Ta bort användare:
+                    <form name="deleteUserForm" action="<%=request.getContextPath()%>/adminDeleteUser"
+                          onsubmit="return passValidation()"
+                          method="POST">
+                        <div class="row align-items-start">
+                            <div class="col">
+                                <input type="text" name="employmentnumber" class="form-control"
+                                       placeholder="Anställningsnummer"
+                                       required>
+                            </div>
+                            <div class="col">
+                                <input type="text" name="name" class="form-control" placeholder="Namn" required>
+                            </div>
+                            <div class="col">
+                                <input type="text" name="mail" class="form-control" placeholder="Mail" required min="6">
+                            </div>
+                            <div class="col">
+                                <input type="text" name="phonenumber" class="form-control" placeholder="Telefon"
+                                       required minlength="10"
+                                       maxlength="10">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="submit" value="Sök" class="btn btn-primary" id="deleteButton"/>
+                            </div>
+                        </div>
                 </div>
+                </form>
+
             </div>
         </div>
-    </form>
+    </div>
+    </div>
 </main>
 
+<script>
+    function passValidation() {
+        var password = document.addUserForm.password.value;
+        var retypePassword = document.addUserForm.retypePassword.value;
+
+        if (password === retypePassword) {
+            return true;
+        } else {
+            alert("Lösenorden måste matcha!");
+            return false;
+        }
+    }
+</script>
 </body>
 </html>

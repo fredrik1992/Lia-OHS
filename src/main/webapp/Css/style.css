@@ -76,7 +76,7 @@ input:checked + .slider:before {
     margin-top: 10px;
 }
 
-#addButton {
+#addButton, #deleteButton {
     background-color: #161D6F;
     color: #E1F3FA;
     min-width: 135px;
