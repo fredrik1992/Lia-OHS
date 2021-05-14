@@ -41,7 +41,7 @@ public class LoginController {
             rd.forward(request, response);
         }else {
             System.out.print("not validated");
-            RequestDispatcher rd = request.getRequestDispatcher("index.html");
+            RequestDispatcher rd = request.getRequestDispatcher("index");
             rd.forward(request, response);
             //return to html
         }

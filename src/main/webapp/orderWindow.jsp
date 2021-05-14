@@ -23,7 +23,15 @@
 <main class="container">
     <%--  add so that a servelet is called that gets all the orders and add them to orderlistbean then get them here
  so that you cant use javascript to create dynamic windows ina a nice list--%>
+        <%
+            // New location to be redirected
+            if(session.getAttribute("user") ==null){
+                String site = new String("index.html");
+                response.setStatus(response.SC_MOVED_TEMPORARILY);
+                response.setHeader("Location", site);
+            }
 
+        %>
     <div class="headContainer" >
         <p>sök på artikel</p>
         <%-- make a serch trough javascript that gets it from the listbean  --%>
