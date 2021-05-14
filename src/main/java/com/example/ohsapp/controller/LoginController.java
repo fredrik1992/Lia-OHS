@@ -25,26 +25,31 @@ public class LoginController {
 
     @RequestMapping(value = "/getLoginController",method = RequestMethod.POST)
     public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        userBean = null;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
+
         boolean validation = validateUser(username,password);
+
 
         if(validation){
             System.out.print("validated");
             HttpSession session = request.getSession();
             session.setAttribute("user",userBean);
-            RequestDispatcher rd = request.getRequestDispatcher("onePage.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("searchWindow.jsp");
             rd.forward(request, response);
         }else {
             System.out.print("not validated");
+            RequestDispatcher rd = request.getRequestDispatcher("index.html");
+            rd.forward(request, response);
             //return to html
         }
 
     }
 
     public boolean validateUser(String username,String password){
-
+            System.out.print("in validate user");
         String sql = "SELECT * FROM users WHERE Username = ? AND Password = ? ";
         try{
 

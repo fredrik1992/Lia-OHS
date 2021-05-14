@@ -9,9 +9,9 @@ public class UserBean {
     private String admin;
     private boolean checkAdmin = false;
 
-    public UserBean(String name, String employeeId,String admin) {
+    public UserBean(String name, String employementNumber,String admin) {
         this.name = name;
-        this.employeeId = employeeId;
+        this.employeeId = employementNumber;
         this.admin = admin;
     }
 

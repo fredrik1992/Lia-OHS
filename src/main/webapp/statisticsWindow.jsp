@@ -18,8 +18,8 @@
     <!--Fontawesome CDN-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href="myCSS.css">
-    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="Css/myCSS.css">
+    <link href="Css/style.css" rel="stylesheet">
 
     <title>Lägg till vara</title>
 </head>
