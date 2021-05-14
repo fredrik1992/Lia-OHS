@@ -24,6 +24,15 @@
     <title>Lägg till vara</title>
 </head>
 <body>
+<%
+    // New location to be redirected
+    if(session.getAttribute("user") ==null){
+        String site = new String("index.html");
+        response.setStatus(response.SC_MOVED_TEMPORARILY);
+        response.setHeader("Location", site);
+    }
+
+%>
 <jsp:include page="dashBoard.jsp"></jsp:include>
 
 <div class="container" id="addProductContainer">
