@@ -14,7 +14,6 @@ function showAttributes(form){
     $('#staticBackdrop').modal("show")
 
 let articleNum = form.articleNum.value;
-let attribute = form.attribute.value;
 let ean = form.ean.value;
 let department = form.department.value;
 let name = form.name.value;
@@ -28,7 +27,6 @@ let supplier = form.supplier.value;
 let maxStock = form.maxStock.value;
 let minStock = form.minStock.value;
 document.getElementById("attributeModalArticle").innerText = articleNum;
-document.getElementById("attributeModalAttribute").innerText = attribute;
 document.getElementById("attributeModalEan").innerText = ean;
 document.getElementById("attributeModalDepartment").innerText = department;
 document.getElementById("attributeModalNamn").innerText = name;

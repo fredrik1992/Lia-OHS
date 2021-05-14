@@ -12,9 +12,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Kundvagn</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+
             </div>
             <div class="modal-body" id="modal-body-cart">
                 ...
@@ -23,7 +21,7 @@
                 <form action="<%=request.getContextPath()%>/SaveOrdersController" method="post">
                     <input type="hidden" name="allOrders" id="123" value="test">
 
-                    <button class="btn btn-outline-primary" onclick="saveOrder()" type="submit">SendOrder</button>
+                    <button class="btn btn-outline-primary" onclick="saveOrder()" type="submit">Skicka order</button>
                 </form>
 
 
