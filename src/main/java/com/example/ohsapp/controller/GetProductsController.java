@@ -91,7 +91,7 @@ public class GetProductsController {
                         rs.getString("Trademark"),rs.getDouble("InPrice"),rs.getDouble("OutPrice"),
                         rs.getInt("StockBalance"),rs.getInt("MaxStockBalance"),rs.getInt("MinStockBalance"),
                         rs.getInt("KfpSize"),rs.getInt("DfpSize"),rs.getString("Department"),
-                        rs.getString("Category"),rs.getString("Attribute"),rs.getInt("ActiveProduct"),
+                        rs.getString("Category"),rs.getInt("ActiveProduct"),
                         rs.getString("Name"),rs.getInt("SupplierId"))
         ).forEach(product ->
                 produktListBean.addProduct(product)

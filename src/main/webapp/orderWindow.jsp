@@ -71,7 +71,6 @@
                                     "<div class=\"containerItemName\">" +
                                     "<form class=\"inputForm\">"+
                                     "<input name = \"articleNum\" type = \"hidden\" value = \""+p.getArticleNumber()+"\">"+
-                                    "<input name = \"attribute\" type = \"hidden\" value = \""+p.getAttribute()+"\">"+
                                     "<input name = \"ean\" type = \"hidden\" value = \""+p.getEanNumber()+"\">"+
                                     "<input name = \"department\" type = \"hidden\" value = \""+p.getDepartment()+"\">"+
                                     "<input name = \"name\" type = \"hidden\" value = \""+p.getName()+"\">"+
