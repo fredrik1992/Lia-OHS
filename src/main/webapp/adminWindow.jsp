@@ -1,3 +1,4 @@
+<%@ page import="com.example.ohsapp.beans.UserBean" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
 
@@ -41,6 +42,12 @@
         String site = new String("index.html");
         response.setStatus(response.SC_MOVED_TEMPORARILY);
         response.setHeader("Location", site);
+    } else {
+        UserBean userBean = (UserBean) session.getAttribute("user");
+        if (!userBean.isCheckAdmin()) {
+            response.setStatus(response.SC_MOVED_TEMPORARILY);
+            response.setHeader("Location", "searchWindow.jsp");
+        }
     }
 
 %>
@@ -167,17 +174,17 @@
                             <div class="col">
                                 <input type="text" name="employmentnumber" class="form-control"
                                        placeholder="Anställningsnummer"
-                                       required>
+                                >
                             </div>
                             <div class="col">
-                                <input type="text" name="name" class="form-control" placeholder="Namn" required>
+                                <input type="text" name="name" class="form-control" placeholder="Namn">
                             </div>
                             <div class="col">
-                                <input type="text" name="mail" class="form-control" placeholder="Mail" required min="6">
+                                <input type="text" name="mail" class="form-control" placeholder="Mail" min="6">
                             </div>
                             <div class="col">
                                 <input type="text" name="phonenumber" class="form-control" placeholder="Telefon"
-                                       required minlength="10"
+                                       minlength="10"
                                        maxlength="10">
                             </div>
                         </div>
