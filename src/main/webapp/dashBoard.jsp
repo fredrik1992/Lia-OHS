@@ -7,10 +7,11 @@
 
     // Hide admin button in navbar if user is not admin
     String hideAdminButton = "";
-    UserBean userBean = (UserBean) session.getAttribute("user");
-    if (!userBean.isCheckAdmin()) {
-        hideAdminButton = "hidden";
-
+    if (session.getAttribute("user") == null) {
+        UserBean userBean = (UserBean) session.getAttribute("user");
+        if (!userBean.isCheckAdmin()) {
+            hideAdminButton = "hidden";
+        }
     }
 
 %>
