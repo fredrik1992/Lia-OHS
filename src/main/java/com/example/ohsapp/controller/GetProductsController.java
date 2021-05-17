@@ -32,6 +32,7 @@ public class GetProductsController {
                                      @RequestParam(name = "article") String article,
                                      @RequestParam(name = "productName") String productName,
                                     @RequestParam(name = "page") String page) throws ServletException, IOException {
+
         produktListBean.nullList();
         String searchQuery = findRelevantQuery(ean, article, productName);
 
