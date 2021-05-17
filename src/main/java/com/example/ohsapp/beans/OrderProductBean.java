@@ -2,10 +2,10 @@ package com.example.ohsapp.beans;
 
 public class OrderProductBean {
 
-    String name;
-    String articleNum;
-    String dfp;
-    String kfp;
+  private   String name;
+  private   String articleNum;
+  private String dfp;
+  private String kfp;
 
     public OrderProductBean(String name, String articleNum, String dfp, String kfp) {
         this.name = name;
