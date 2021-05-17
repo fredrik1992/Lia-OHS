@@ -27,8 +27,7 @@ public class ProduktBean {
     public ProduktBean(String articleNumber, String eanNumber, String tradeMark,
                        double inPrice, double outPrice, int stockBalance,
                        int maxStockBalance, int minStockBalance, int kfpSize,
-                       int dfpSize, String department, String category,
-                       String attribute, int activeProduct, String name,
+                       int dfpSize, String department, String category, int activeProduct, String name,
                        int supplierId) {
         this.articleNumber = articleNumber;
         this.eanNumber = eanNumber;
@@ -42,7 +41,6 @@ public class ProduktBean {
         this.dfpSize = dfpSize;
         this.department = department;
         this.category = category;
-        this.attribute = attribute;
         this.activeProduct = activeProduct;
         this.name = name;
         this.supplierId = supplierId;
@@ -144,13 +142,6 @@ public class ProduktBean {
         this.category = category;
     }
 
-    public String getAttribute() {
-        return attribute;
-    }
-
-    public void setAttribute(String attribute) {
-        this.attribute = attribute;
-    }
 
     public int getActiveProduct() {
         return activeProduct;
@@ -175,18 +166,5 @@ public class ProduktBean {
     public void setSupplierId(int supplierId) {
         this.supplierId = supplierId;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

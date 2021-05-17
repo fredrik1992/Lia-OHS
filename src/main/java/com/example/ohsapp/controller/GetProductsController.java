@@ -2,16 +2,13 @@ package com.example.ohsapp.controller;
 
 import com.example.ohsapp.beans.ProduktBean;
 import com.example.ohsapp.beans.ProduktListBean;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @ControllerAdvice
@@ -97,7 +92,7 @@ public class GetProductsController {
                         rs.getString("Trademark"),rs.getDouble("InPrice"),rs.getDouble("OutPrice"),
                         rs.getInt("StockBalance"),rs.getInt("MaxStockBalance"),rs.getInt("MinStockBalance"),
                         rs.getInt("KfpSize"),rs.getInt("DfpSize"),rs.getString("Department"),
-                        rs.getString("Category"),rs.getString("Attribute"),rs.getInt("ActiveProduct"),
+                        rs.getString("Category"),rs.getInt("ActiveProduct"),
                         rs.getString("Name"),rs.getInt("SupplierId"))
         ).forEach(product ->
                 produktListBean.addProduct(product)

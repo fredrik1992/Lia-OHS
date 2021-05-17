@@ -1,10 +1,25 @@
+<%@ page import="com.example.ohsapp.beans.UserBean" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8"%>
+         pageEncoding="utf-8" %>
+
+
+<%
+
+    // Hide admin button in navbar if user is not admin
+    String hideAdminButton = "";
+    UserBean userBean = (UserBean) session.getAttribute("user");
+    if (!userBean.isCheckAdmin()) {
+        hideAdminButton = "hidden";
+
+    }
+
+%>
 
 <nav class="navbar navbar-expand-lg dash">
     <div class="container-fluid">
         <a class="navbar-brand dash" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -23,6 +38,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link dash" href="/statisticsWindow.jsp">Statistik</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link dash" <%=hideAdminButton%> href="/adminWindow.jsp">Admin</a>
                 </li>
             </ul>
         </div>

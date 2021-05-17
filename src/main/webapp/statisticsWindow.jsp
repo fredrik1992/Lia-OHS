@@ -18,12 +18,21 @@
     <!--Fontawesome CDN-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href="myCSS.css">
-    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="Css/myCSS.css">
+    <link href="Css/style.css" rel="stylesheet">
 
     <title>Lägg till vara</title>
 </head>
 <body>
+<%
+    // New location to be redirected
+    if(session.getAttribute("user") ==null){
+        String site = new String("index.html");
+        response.setStatus(response.SC_MOVED_TEMPORARILY);
+        response.setHeader("Location", site);
+    }
+
+%>
 <jsp:include page="dashBoard.jsp"></jsp:include>
 
 <div class="container" id="addProductContainer">
