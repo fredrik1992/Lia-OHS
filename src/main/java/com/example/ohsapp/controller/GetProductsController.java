@@ -30,7 +30,8 @@ public class GetProductsController {
     @RequestMapping(value = "/getProductsController", method = RequestMethod.GET)
     public void multibleInputHandler(HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "ean") String ean,
                                      @RequestParam(name = "article") String article,
-                                     @RequestParam(name = "productName") String productName) throws ServletException, IOException {
+                                     @RequestParam(name = "productName") String productName,
+                                    @RequestParam(name = "page") String page) throws ServletException, IOException {
         produktListBean.nullList();
         String searchQuery = findRelevantQuery(ean, article, productName);
 
@@ -43,8 +44,13 @@ public class GetProductsController {
 
         HttpSession session = request.getSession();
         session.setAttribute("test", produktListBean);
-        RequestDispatcher rd = request.getRequestDispatcher("orderWindow.jsp");
-        rd.forward(request, response);
+
+        if(page.equals("searchWindow")){
+            RequestDispatcher rd = request.getRequestDispatcher("searchWindow.jsp");
+            rd.forward(request, response);
+        }
+        else{RequestDispatcher rd = request.getRequestDispatcher("orderWindow.jsp");
+        rd.forward(request, response);}
 
 
     }
