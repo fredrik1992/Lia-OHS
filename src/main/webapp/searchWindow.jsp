@@ -1,3 +1,6 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.ohsapp.beans.ProduktBean" %>
+<%@ page import="com.example.ohsapp.beans.ProduktListBean" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -22,13 +25,14 @@
                 <input type="text" class="form-control" placeholder="EAN" name="ean">
             </div>
             <div class="col">
-                <input type="text" class="form-control" placeholder="ArtickelNr" name="artikelNr">
+                <input type="text" class="form-control" placeholder="ArtickelNr" name="article">
             </div>
             <div class="col">
-                <input type="text" class="form-control" placeholder="Namn" name="namn">
+                <input type="text" class="form-control" placeholder="Namn" name="productName">
             </div>
             <div class="col">
                 <div class="float-end">
+                    <input type="hidden" name="page" value="searchWindow">
                     <input type="submit" value="Sök" class="btn btn-primary" id="addProductButton"/>
                 </div>
             </div>
@@ -38,14 +42,23 @@
 
 
 <%
-    //for (Product p : products){
-        out.print("<ul type=\"button\"class=\"list-group btn\" data-bs-toggle=\"modal\" data-bs-target=\"#staticBackdrop\">"
-                + "<li class=\"list-group-item d-flex justify-content-between align-items-center lists\">"
-                +"A list item"
-                +"<span class=\"badge bg-primary rounded-pill\">></span>"
-                +"</li>"
-                +"</ul>");
-   // }
+    ProduktListBean test = (ProduktListBean) session.getAttribute("test");
+    try {
+        for (ProduktBean p : test.getAllOrders()) {
+            String name = p.getName().replaceAll("\\s","");
+            out.print("<ul type=\"button\"class=\"list-group btn itemNameButton\" data-bs-toggle=\"modal\" data-bs-target=\"#staticBackdrop\" " +
+                     "onclick=showValues(\""+p.getArticleNumber()+"\",\""+p.getAttribute()+"\",\""
+                    +p.getEanNumber()+"\",\""+p.getDepartment()+"\",\""+name
+                    +"\",\""+p.getCategory()+"\",\""+p.getInPrice()+"\",\""+p.getTradeMark()
+                    +"\",\""+p.getOutPrice()+"\",\""+p.getActiveProduct()+"\",\""+p.getStockBalance()+
+                    "\",\""+p.getSupplierId()+"\",\""+p.getMaxStockBalance()+"\",\""+p.getMinStockBalance()+"\")>"
+                    + "<li class=\"list-group-item d-flex justify-content-between align-items-center lists\">"
+                    + p.getEanNumber() + "        " + p.getName()
+                    + "<span class=\"badge bg-primary rounded-pill\">></span>"
+                    + "</li>"
+                    + "</ul>");
+        }
+    }catch (Exception e){ return;}
 %>
 </div>
 <!-- Modal -->
@@ -62,45 +75,53 @@
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item w-50 lists" >Artikelnummer:
                         <input class="input" id="0" name="articlenumber">
-                        <input type="hidden" name="hiddenArtNr" value="ArticleNumber">
+                        <p class="value d-inline"></p>
+                        <input type="hidden" name="hiddenArtNr" value="ArticleNumber   ">
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(0)">Ändra</button>
                     </li>
                     <li class="list-group-item w-50 lists">Attribut:
                         <input class="input" id="1">
                         <input type="hidden" name="hiddenAttribute" value="Attribute">
+                        <p class="value d-inline"></p>
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(1)">Ändra</button>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item w-50 lists">EAN:
                         <input class="input" id="2" name="ean" >
-                        <input type="hidden" name="hiddenEan" value="2222">
+                        <input class="hiddenean" type="hidden" name="hiddenEan">
+                        <p class="value d-inline"></p>
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(2)">Ändra</button>
                     </li>
                     <li class="list-group-item w-50 lists">Avdelning:
                         <input class="input" id="3" name="">
+                        <p class="value d-inline"></p>
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(3)">Ändra</button>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item w-50 lists">Namn:
                         <input class="input" id="4" name="name">
-                        <input type="hidden" name="hiddenName" value="Name">
+                        <p class="value d-inline"></p>
+                        <input type="hidden" name="attribute" value="1">
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(4)">Ändra</button>
                     </li>
                     <li class="list-group-item w-50 lists">Produktkategori:
                         <input class="input" id="5" name="category">
+                        <p class="value d-inline"></p>
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(5)">Ändra</button>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item w-50 lists" >Inpris:
                         <input class="input" id="6" name="inprice">
+                        <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenInPrice" value="InPrice">
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(6)">Ändra</button>
                     </li>
                     <li class="list-group-item w-50 lists" >Varumärke:
                         <input class="input" id="7" name="trademark">
+                        <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenTrademark" value="Trademark">
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(7)">Ändra</button>
                     </li>
@@ -108,11 +129,13 @@
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item w-50 lists" >Utpris:
                         <input class="input" id="8" name="outprice">
+                        <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenOutPrice" value="OutPrice">
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(8)">Ändra</button>
                     </li>
                     <li class="list-group-item w-50 lists" >Aktiv:
                         <input class="input" id="9" name="activeProduct">
+                        <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenActive" value="ActiveProduct">
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(9)">Ändra</button>
                     </li>
@@ -120,17 +143,20 @@
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item w-50 lists" >Lagersaldo:
                         <input class="input" id="10" name="stockbalance">
+                        <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenStockBalance" value="StockBalance">
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(10)">Ändra</button>
                     </li>
                     <li class="list-group-item w-50 lists" >Leverantör:
                         <input class="input" id="11" >
+                        <p class="value d-inline"></p>
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(11)">Ändra</button>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item w-50 lists">Max i lager:
                         <input class="input" id="12" name="maxstockbalance">
+                        <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenMax" value="MaxStockBalance">
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(12)">Ändra</button>
                     </li>
@@ -139,6 +165,7 @@
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item w-50 lists" >Min i lager:
                         <input class="input" id="13" name="minstockbalance">
+                        <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenMin" value="MinStockBalance">
                         <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(13)">Ändra</button>
 
@@ -146,7 +173,7 @@
                     <li class="list-group-item w-50">
                         <button type="submit" class="btn btn-primary btn-sm" >Spara</button></form>
                         <form action="<%=request.getContextPath()%>/removeProductController" method="GET">
-                            <input type="hidden" name="hiddenEan" value="2222">
+                            <input class="hiddenean" type="hidden" name="hiddenEan">
                             <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Är du säker?')" >Ta bort vara</button>
                         </form>
                     </li>
@@ -177,6 +204,20 @@
        } else{input.setAttribute("class", "input")}
     }
 
+    function showValues (articleNr, attribute, ean, department, name, category,
+                         inprice, trademark, outprice, active, stockbalance,
+                        supplier, maxbalance, minbalance){
+        let vlist = [minbalance,maxbalance,supplier,stockbalance,active,outprice,trademark,inprice,category,name,department,ean,attribute,articleNr]
+        let v = document.getElementsByClassName("value")
+        let hiddenean = document.getElementsByClassName("hiddenean")
+        hiddenean.item(0).setAttribute("value", ean)
+        hiddenean.item(1).setAttribute("value", ean)
+        console.log(vlist)
+        for (let i = 0; i<v.length; i++){
+            let val = v.item(i)
+            val.innerText = vlist.pop()
+        }
+    }
 
 
 </script>

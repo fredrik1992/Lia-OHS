@@ -110,7 +110,7 @@ public class removeProductController {
     }
 
     private void deleteInDB(String hiddenEan) {
-        String sqlQuery = "DELETE FROM `products` WHERE "+hiddenEan;
+        String sqlQuery = "DELETE FROM `products` WHERE `EANNumber` ="+hiddenEan;
         jdbcTemplate.update(sqlQuery);
     }
 
