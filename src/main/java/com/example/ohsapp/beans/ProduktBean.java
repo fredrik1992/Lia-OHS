@@ -167,17 +167,4 @@ public class ProduktBean {
         this.supplierId = supplierId;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
