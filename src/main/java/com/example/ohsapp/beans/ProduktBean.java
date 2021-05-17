@@ -16,6 +16,9 @@ public class ProduktBean {
     private int dfpSize;
     private String department;
     private String category;
+
+
+
     private String attribute;
     private int activeProduct;
     private String name;
@@ -165,6 +168,9 @@ public class ProduktBean {
 
     public void setSupplierId(int supplierId) {
         this.supplierId = supplierId;
+    }
+    public String getAttribute() {
+        return attribute;
     }
 
 }

@@ -34,6 +34,7 @@
     <div class="headContainer" >
         <p>sök på artikel</p>
         <form action="<%=request.getContextPath()%>/getProductsController" class = "searchProductContainer">
+            <input type="hidden" name="page" value="notUsed">
             <div class="form-group inputField">
 
                 <input type="text" class="form-control" id="eanSearch" name="ean" aria-describedby="emailHelp" placeholder="Ean">

@@ -27,10 +27,10 @@ public  class GetOrders {
     }
 
    private  ArrayList<OrderProductBean> getProductFromDatabase(ArrayList orderProducts){
-
-        String sqlQuerry = "SELECT * FROM `orderproducts` WHERE 1 ";
+        System.out.print("in get products");
+        String sqlQuery = "SELECT * FROM `orderproducts` WHERE 1 ";
        jdbcTemplate.query(
-               sqlQuerry, new Object[]{},
+               sqlQuery, new Object[]{},
                (rs, rowNum) -> new OrderProductBean(rs.getString("ArticleNumber"),
                        rs.getString("ArticleNumber"),rs.getString("DfpQuantity"),
                        rs.getString("KfpQuantity "))

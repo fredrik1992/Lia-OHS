@@ -38,7 +38,7 @@ public class LoginController {
             System.out.print("validated");
             HttpSession session = request.getSession();
             session.setAttribute("user",userBean);
-            RequestDispatcher rd = request.getRequestDispatcher("searchWindow.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("orderWindow.jsp");
             rd.forward(request, response);
         }
             System.out.print("not validated");
