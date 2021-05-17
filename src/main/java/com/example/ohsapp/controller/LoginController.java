@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +25,7 @@ public class LoginController {
     private JdbcTemplate jdbcTemplate;
 
     @RequestMapping(value = "/getLoginController",method = RequestMethod.POST)
-    public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public RedirectView login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         userBean = null;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -39,12 +40,12 @@ public class LoginController {
             session.setAttribute("user",userBean);
             RequestDispatcher rd = request.getRequestDispatcher("searchWindow.jsp");
             rd.forward(request, response);
-        }else {
-            System.out.print("not validated");
-            RequestDispatcher rd = request.getRequestDispatcher("index");
-            rd.forward(request, response);
-            //return to html
         }
+            System.out.print("not validated");
+            return new RedirectView("http://localhost:8080/");
+
+            //return to html
+
 
     }
 

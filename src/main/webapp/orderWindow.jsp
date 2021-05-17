@@ -21,8 +21,7 @@
 <jsp:include page="dashBoard.jsp"></jsp:include>
 
 <main class="container">
-    <%--  add so that a servelet is called that gets all the orders and add them to orderlistbean then get them here
- so that you cant use javascript to create dynamic windows ina a nice list--%>
+
         <%
             // New location to be redirected
             if(session.getAttribute("user") ==null){
@@ -34,7 +33,6 @@
         %>
     <div class="headContainer" >
         <p>sök på artikel</p>
-        <%-- make a serch trough javascript that gets it from the listbean  --%>
         <form action="<%=request.getContextPath()%>/getProductsController" class = "searchProductContainer">
             <div class="form-group inputField">
 
@@ -51,7 +49,6 @@
                 <input type="text" class="form-control" name="productName" id="productSearch" aria-describedby="emailHelp" placeholder="ProduktNamn">
 
             </div>
-            <%-- skicka till controllerec2-user@ec2-3-250-53-125.eu-west-1.compute.amazonaws.com --%>
             <div class="col">
                 <div class="float-end">
 
@@ -95,7 +92,7 @@
                                     "</form>"+
                                     "</div>" +
                                     "<form class=\"inputForm\">" +
-                                    "<input type=\"hidden\" name=\"hiddenProductName\" value=\""+p.getName()+"\">" +
+                                    "<input  type=\"hidden\" name=\"hiddenProductName\" value=\""+p.getName()+"\">" +
                                     " <input type=\"hidden\" name=\"hiddenArticleNum\" value=\""+p.getArticleNumber()+"\">" +
                                     " <div class=\"form-group inputFormItemContainer\">" +
                                     " <h2 class=\"packageSizeName\" >DFP(128)</h2>" +
