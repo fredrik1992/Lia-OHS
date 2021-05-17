@@ -57,18 +57,24 @@
 
 <main class="container" id="addContainer">
     <%
-        String addProductProcess = (String) request.getAttribute("addUserProcess");
+        String userProcess = (String) request.getAttribute("userProcess");
         String alertClassName = "alert-danger";
         String alertMessage = "Något gick fel.";
         String alertIcon = "#exclamation-triangle-fill";
 
-        if (addProductProcess != null) {
-            if (addProductProcess.equals("1")) {
+        if (userProcess != null) {
+            if (userProcess.equals("1")) {
                 alertClassName = "alert-success";
                 alertMessage = "Användaren har lagts till.";
                 alertIcon = "#check-circle-fill";
-            } else if (addProductProcess.equals("0")) {
+            } else if (userProcess.equals("0")) {
                 alertMessage = "Det finns redan en användare med detta anställningsnummer eller användarnamn.";
+            } else if (userProcess.equals("3")) {
+                alertMessage = "Det finns inte en användare med detta anställningsnummer.";
+            } else if (userProcess.equals("4")) {
+                alertMessage = "Användaren har tagits bort.";
+                alertIcon = "#check-circle-fill";
+                alertClassName = "alert-success";
             }
 
             out.println("<div class=\"alert " + alertClassName + " d-flex align-items-center\" role = \"alert\">");
@@ -94,7 +100,6 @@
                  data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
 
-                    Lägg till användare:
                     <form name="addUserForm" action="<%=request.getContextPath()%>/adminAddUser"
                           onsubmit="return passValidation()"
                           method="POST">
@@ -165,37 +170,23 @@
                  data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
 
-
-                    Ta bort användare:
                     <form name="deleteUserForm" action="<%=request.getContextPath()%>/adminDeleteUser"
                           onsubmit="return passValidation()"
                           method="POST">
                         <div class="row align-items-start">
                             <div class="col">
                                 <input type="text" name="employmentnumber" class="form-control"
-                                       placeholder="Anställningsnummer"
+                                       placeholder="Anställningsnummer" required
                                 >
                             </div>
                             <div class="col">
-                                <input type="text" name="name" class="form-control" placeholder="Namn">
-                            </div>
-                            <div class="col">
-                                <input type="text" name="mail" class="form-control" placeholder="Mail" min="6">
-                            </div>
-                            <div class="col">
-                                <input type="text" name="phonenumber" class="form-control" placeholder="Telefon"
-                                       minlength="10"
-                                       maxlength="10">
+                                <button type="submit" class="btn btn-primary btn-sm" id="deleteButton"
+                                        onclick="return confirm('Är du säker?')">Ta bort användare
+                                </button>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <input type="submit" value="Sök" class="btn btn-primary" id="deleteButton"/>
-                            </div>
-                        </div>
+                    </form>
                 </div>
-                </form>
-
             </div>
         </div>
     </div>
