@@ -92,27 +92,27 @@
         </div>
         <div class="row align-items-center">
             <div class="col">
-                <input type="text" name="inprice" class="form-control" placeholder="Inpris" required>
+                <input type="number" name="inprice" class="form-control" placeholder="Inpris" required>
             </div>
             <div class="col">
-                <input type="text" name="outprice" class="form-control" placeholder="Utpris" required>
+                <input type="number" name="outprice" class="form-control" placeholder="Utpris" required>
             </div>
             <div class="col">
-                <input type="text" name="kfpsize" class="form-control" placeholder="KRP Storlek" required>
+                <input type="number" name="kfpsize" class="form-control" placeholder="KRP Storlek" required>
             </div>
             <div class="col">
-                <input type="text" name="dfpsize" class="form-control" placeholder="DFP Storlek" required>
+                <input type="number" name="dfpsize" class="form-control" placeholder="DFP Storlek" required>
             </div>
         </div>
         <div class="row align-items-center">
             <div class="col">
-                <input type="text" name="minstockbalance" class="form-control" placeholder="Min i lager" required>
+                <input type="number" name="minstockbalance" class="form-control" placeholder="Min i lager" required>
             </div>
             <div class="col">
-                <input type="text" name="maxstockbalance" class="form-control" placeholder="Max i lager" required>
+                <input type="number" name="maxstockbalance" class="form-control" placeholder="Max i lager" required>
             </div>
             <div class="col">
-                <input type="text" name="stockbalance" class="form-control" placeholder="Antal i lager" required>
+                <input type="number" name="stockbalance" class="form-control" placeholder="Antal i lager" required>
             </div>
             <div class="col">
                 <input type="text" name="department" class="form-control" placeholder="Avdelning" required>
