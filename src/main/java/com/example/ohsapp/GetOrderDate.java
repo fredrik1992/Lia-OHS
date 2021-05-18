@@ -16,8 +16,44 @@ public class GetOrderDate {
     public Date getDate(){
 
         Date date = null;
-        String sql = "SELECT Date FROM `orders` WHERE `OrderId` =(SELECT MAX(OrderId)FROM orders)";
+        String sql = "SELECT Date FROM `orders` WHERE `OrderId` =(SELECT MAX(OrderId)FROM orders w)";
+        createConnection();
 
+        try {
+            int orderId = getOrderId();
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            while (rs.next()){
+               date = rs.getDate("Date");
+            }
+            conn.close();
+
+
+        }catch (Exception e){
+            System.out.print("wrong in statment date");
+        }
+
+        return date;
+    }
+
+    public int getOrderId (){
+        String sql = "SELECT OrderId FROM `orders` WHERE `OrderId` =(SELECT MAX(OrderId)FROM orders)";
+        createConnection();
+        int orderId = 0;
+        try {
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            while (rs.next()){
+                orderId = rs.getInt("OrderId");
+            }
+        }catch (Exception e){
+            System.out.print("cant connect to database");
+        }
+        return orderId;
+
+    }
+
+    public void  createConnection(){
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/aob?",
                     "root", "");
@@ -25,18 +61,5 @@ public class GetOrderDate {
         }catch (Exception e){
             System.out.print("SQLExepection" + e.getMessage());
         }
-        try {
-
-            stmt = conn.prepareStatement(sql);
-            rs = stmt.executeQuery();
-            while (rs.next()){
-               date = rs.getDate("Date");
-            }
-
-
-        }catch (Exception e){
-            System.out.print("wrong in statment date");
-        }
-        return date;
     }
 }
