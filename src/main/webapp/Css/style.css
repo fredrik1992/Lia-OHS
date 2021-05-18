@@ -1,3 +1,11 @@
+
+/*
+
+Add product page
+
+*/
+
+
 html , body{
     background-color: #F6F6F6;
     color: #888888;
@@ -112,4 +120,29 @@ input:checked + .slider:before {
     padding: 10px;
     display: flex;
     justify-content: space-between;
+}
+
+
+
+
+/*
+
+    Admin page
+
+*/
+
+
+
+.accordion-button:not(.collapsed) {
+    background-color: #e6e6e6;
+    color: black;
+}
+
+.accordion-body {
+    background-color: white;
+}
+
+
+.accordion-button:focus {
+    box-shadow: none;
 }
