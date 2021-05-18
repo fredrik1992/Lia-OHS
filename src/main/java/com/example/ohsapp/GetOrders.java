@@ -20,11 +20,7 @@ public  class GetOrders {
 
 
 
-    public ArrayList<OrderProductBean> sendOrder(){
-        ArrayList <OrderProductBean> orderProductBeans;
-        orderProductBeans = getOrder();
-        return orderProductBeans;
-    }
+
 
     public  ArrayList<OrderProductBean> getOrder(){
         ArrayList<OrderProductBean> tempArray = new ArrayList<OrderProductBean>();
