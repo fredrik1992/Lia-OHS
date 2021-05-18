@@ -28,9 +28,11 @@ public class removeProductController {
                            @RequestParam(name = "maxstockbalance") String maxStockBalance,
                            @RequestParam(name = "stockbalance") String stockBalance,
                            @RequestParam(name = "category") String category,
-                                      @RequestParam(name = "hiddenEan") String hiddenEan) {
+                                      @RequestParam(name = "hiddenEan") String hiddenEan,
+                                      @RequestParam(name = "name") String name,
+                                      @RequestParam(name = "department") String department) {
         ArrayList<String> validatedInput;
-       validatedInput = validateInput(ean,articleNumber,trademark,inPrice,outPrice, minStockBalance,maxStockBalance,stockBalance,category);
+       validatedInput = validateInput(ean,articleNumber,trademark,inPrice,outPrice, minStockBalance,maxStockBalance,stockBalance,category,name,department);
 
        updateToDB(hiddenEan, validatedInput);
         System.out.println(validatedInput);
@@ -41,6 +43,7 @@ public class removeProductController {
     }
 
     private void updateToDB(String hiddenEan, ArrayList<String> validatedInput) {
+        System.out.println(validatedInput);
         for (int i=0; i<validatedInput.size();i+=2){
 
             String sqlQuery = "UPDATE `products` SET " +validatedInput.get(i) + "=" + validatedInput.get(i+1) + " WHERE EANNumber ="+hiddenEan;
@@ -50,14 +53,16 @@ public class removeProductController {
     }
 
     public ArrayList<String> validateInput(String ean,
-                               String articleNumber,
-                               String trademark,
-                               String inPrice,
-                               String outPrice,
-                               String minStockBalance,
-                               String maxStockBalance,
-                               String stockBalance,
-                               String category) {
+                                           String articleNumber,
+                                           String trademark,
+                                           String inPrice,
+                                           String outPrice,
+                                           String minStockBalance,
+                                           String maxStockBalance,
+                                           String stockBalance,
+                                           String category,
+                                           String name,
+                                           String department) {
         ArrayList<String> l = new ArrayList<>();
             if (ean.length()>1){
 
@@ -70,16 +75,15 @@ public class removeProductController {
         }
          if (trademark.length()>1){
             l.add("Trademark");
-            trademark = "`" + trademark+"`";
-            l.add(trademark);
+            l.add("\""+trademark+"\"");
         }
         if (inPrice.length()>1){
             l.add("InPrice");
-            l.add(inPrice);
+            l.add(inPrice.replace(",", "."));
         }
         if (outPrice.length()>1){
             l.add("OutPrice");
-            l.add(outPrice);
+            l.add(outPrice.replace(",", "."));
         }
         if (minStockBalance.length()>1){
             l.add("MinStockBalance");
@@ -96,6 +100,14 @@ public class removeProductController {
         if (category.length()>1){
             l.add("`Category`");
             l.add("\""+category+"\"");
+        }
+        if (name.length()>1){
+            l.add("Name");
+            l.add("\""+name+"\"");
+        }
+        if (name.length()>1){
+            l.add("Department");
+            l.add("\""+department+"\"");
         }
         return l;
     }

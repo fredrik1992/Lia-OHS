@@ -27,7 +27,7 @@ import org.apache.commons.csv.CSVPrinter;
 
 public class SaveOrdersController {
 
-    private static final String SAMPLE_CSV_FILE = "./sample.csv";
+
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -39,7 +39,7 @@ public class SaveOrdersController {
         allOrders = cleanUpString(allOrders);
         orderProductBeans = addOrdersToList(allOrders);
         addToOrderTable(orderProductBeans);
-        orderToCSVFile();
+        orderToCSVFile(orderProductBeans);
         RequestDispatcher rd = request.getRequestDispatcher("orderWindow.jsp");
         rd.forward(request, response);
 
@@ -105,7 +105,9 @@ public class SaveOrdersController {
         return tempArray;
     }
 
-    public void orderToCSVFile() throws IOException{
+    public void orderToCSVFile(ArrayList<OrderProductBean> orderlist) throws IOException{
+
+        String SAMPLE_CSV_FILE = "./sample.csv";
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(SAMPLE_CSV_FILE));
              CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
                      .withHeader("OrderId", "ArticleNumber", "Quantity"));){
