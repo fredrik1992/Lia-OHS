@@ -33,26 +33,18 @@ public class adminController {
                                @RequestParam(name = "isadmin") String isAdmin) throws ServletException, IOException {
 
 
-        request.setAttribute("addUserProcess", "1");
-        String sql = "INSERT INTO `users` (EmploymentNumber, Username, Password, Name, Mail, PhoneNumber, IsAdmin) Values(?, ?, ?, ?, ?, ?, ?)";
-
-        String sqlCheckIfEmploymentNumberExists = "SELECT EmploymentNumber FROM `users` WHERE EmploymentNumber = '" + employmentNumber + "'";
-        Map checkIfEmploymentNumberExists = (DataAccessUtils.singleResult(jdbcTemplate.queryForList(sqlCheckIfEmploymentNumberExists)));
-
-        String sqlCheckIfUsernameExists = "SELECT Username FROM `users` WHERE Username = '" + username + "'";
-        Map checkIfUsernameExists = (DataAccessUtils.singleResult(jdbcTemplate.queryForList(sqlCheckIfUsernameExists)));
-
-        if (checkIfEmploymentNumberExists != null || checkIfUsernameExists != null) {
-            request.setAttribute("addUserProcess", "0");
+        if (checkIfRowExistsInDatabase("EmploymentNumber", "users", employmentNumber) || checkIfRowExistsInDatabase("Username", "users", username)) {
+            request.setAttribute("userProcess", "0");
         } else {
             try {
-                System.out.println(employmentNumber);
-                int result = jdbcTemplate.update(sql, employmentNumber, username, password, name, mail, phoneNumber, isAdmin);
+                String sqlAddUser = "INSERT INTO `users` (EmploymentNumber, Username, Password, Name, Mail, PhoneNumber, IsAdmin) Values(?, ?, ?, ?, ?, ?, ?)";
+                int result = jdbcTemplate.update(sqlAddUser, employmentNumber, username, password, name, mail, phoneNumber, isAdmin);
 
                 if (result > 0) {
+                    request.setAttribute("userProcess", "1");
                     System.out.println("A new row has been inserted.");
                 } else {
-                    request.setAttribute("addUserProcess", "2");      // Something went wrong
+                    request.setAttribute("userProcess", "2");      // Something went wrong
                 }
 
             } catch (Exception e) {
@@ -64,46 +56,40 @@ public class adminController {
     }
 
 
-    ///////////////////////////// WORKING ON THIS BELOW /////////////////////////////
-
-
-/*    @RequestMapping(path = "/adminDeleteUser", method = RequestMethod.POST)
+    @RequestMapping(path = "/adminDeleteUser", method = RequestMethod.POST)
     public void deleteUserHandler(HttpServletRequest request, HttpServletResponse response,
-                                  @RequestParam(required = false, name = "employmentnumber") String employmentNumber,
-                                  @RequestParam(required = false, name = "name") String name,
-                                  @RequestParam(required = false, name = "mail") String mail,
-                                  @RequestParam(required = false, name = "phonenumber") String phoneNumber) throws ServletException, IOException {
+                                  @RequestParam(name = "employmentnumber") String employmentNumber) throws ServletException, IOException {
 
-        request.setAttribute("deleteUserProcess", "1");
-        String sql = "DELETE FROM `users` (EmploymentNumber, Username, Password, Name, Mail, PhoneNumber, IsAdmin) Values(?, ?, ?, ?, ?, ?, ?)";
 
-        String sqlCheckIfEmploymentNumberExists = "SELECT EmploymentNumber FROM `users` WHERE EmploymentNumber = '" + employmentNumber + "'";
-        Map checkIfEmploymentNumberExists = (DataAccessUtils.singleResult(jdbcTemplate.queryForList(sqlCheckIfEmploymentNumberExists)));
-
-        String sqlCheckIfUsernameExists = "SELECT Username FROM `users` WHERE Username = '" + username + "'";
-        Map checkIfUsernameExists = (DataAccessUtils.singleResult(jdbcTemplate.queryForList(sqlCheckIfUsernameExists)));
-
-        if (checkIfEmploymentNumberExists != null || checkIfUsernameExists != null) {
-            request.setAttribute("deleteUserProcess", "0");
+        if (!checkIfRowExistsInDatabase("EmploymentNumber", "users", employmentNumber)) {
+            request.setAttribute("userProcess", "3");
         } else {
             try {
-                System.out.println(employmentNumber);
-                int result = jdbcTemplate.update(sql, employmentNumber, username, password, name, mail, phoneNumber, isAdmin);
+                String sqlDeleteUser = "DELETE FROM `users` WHERE EmploymentNumber =?";
+                int result = jdbcTemplate.update(sqlDeleteUser, employmentNumber);
 
                 if (result > 0) {
+                    request.setAttribute("userProcess", "4");
                     System.out.println("A row has been deleted.");
                 } else {
-                    request.setAttribute("deleteUserProcess", "2");      // Something went wrong
+                    request.setAttribute("userProcess", "2");      // Something went wrong
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
         redirect(request, response, "adminWindow.jsp");
-    }*/
+    }
 
+
+    private boolean checkIfRowExistsInDatabase(String column, String table, String value) {
+        String sqlCheckIfEmploymentNumberExists = "SELECT " + column + " FROM `" + table + "` WHERE " + column + " = '" + value + "'";
+        Map checkIfEmploymentNumberExists = (DataAccessUtils.singleResult(jdbcTemplate.queryForList(sqlCheckIfEmploymentNumberExists)));
+        if (checkIfEmploymentNumberExists == null) {
+            return false;
+        }
+        return true;
+    }
 
     private void redirect(HttpServletRequest request, HttpServletResponse response, String page) throws ServletException, IOException {
         HttpSession session = request.getSession();

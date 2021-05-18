@@ -12,7 +12,6 @@
         UserBean userBean = (UserBean) session.getAttribute("user");
         if (!userBean.isCheckAdmin()) {
             hideAdminButton = "hidden";
-
         }
     }
 
