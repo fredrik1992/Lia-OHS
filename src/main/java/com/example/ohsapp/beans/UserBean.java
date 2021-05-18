@@ -2,7 +2,7 @@ package com.example.ohsapp.beans;
 
 public class UserBean {
     private String name;
-    private String employementNumber;
+    private String employmentNumber;
     private String admin;
     private boolean checkAdmin = false;
     private String mail;
@@ -10,12 +10,21 @@ public class UserBean {
     private String userName;
     private String password;
 
-    public UserBean(String name, String employementNumber,String admin) {
+    public UserBean(String name, String employmentNumber, String admin) {
         this.name = name;
-        this.employementNumber = employementNumber;
+        this.employmentNumber = employmentNumber;
         this.admin = admin;
     }
 
+    public UserBean(String employmentNumber, String name, String mail, String phoneNumber, String userName, String password, String admin) {
+        this.name = name;
+        this.employmentNumber = employmentNumber;
+        this.admin = admin;
+        this.mail = mail;
+        this.phoneNumber = phoneNumber;
+        this.userName = userName;
+        this.password = password;
+    }
 
     public String getName() {
         return name;
@@ -27,11 +36,11 @@ public class UserBean {
 
 
     public String getEmployeeId() {
-        return employementNumber;
+        return employmentNumber;
     }
 
     public void setEmployeeId(String employeeId) {
-        this.employementNumber = employeeId;
+        this.employmentNumber = employeeId;
     }
 
     public boolean isCheckAdmin() {
@@ -39,7 +48,7 @@ public class UserBean {
     }
 
     public void initiateCheckAdmin() {
-        if(this.admin.equals("1")){
+        if (this.admin.equals("1")) {
             this.checkAdmin = true;
         }
     }

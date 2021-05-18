@@ -85,27 +85,28 @@
                     <li class="list-group-item w-50 lists" >Artikelnummer:
                         <input class="input" id="0" name="articlenumber">
                         <p class="value d-inline"></p>
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(0)"></i>
                         <input type="hidden" name="hiddenArtNr" value="ArticleNumber   ">
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(0)">Ändra</button>
                     </li>
                     <li class="list-group-item w-50 lists">Attribut:
                         <input class="input" id="1">
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(1)"></i>
                         <input type="hidden" name="hiddenAttribute" value="Attribute">
                         <p class="value d-inline"></p>
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(1)">Ändra</button>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item w-50 lists">EAN:
                         <input class="input" id="2" name="ean" >
                         <input class="hiddenean" type="hidden" name="hiddenEan">
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(2)"></i>
+
                         <p class="value d-inline"></p>
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(2)">Ändra</button>
                     </li>
                     <li class="list-group-item w-50 lists">Avdelning:
-                        <input class="input" id="3" name="">
+                        <input class="input" id="3" name="department">
                         <p class="value d-inline"></p>
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(3)">Ändra</button>
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(3)"></i>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
@@ -113,12 +114,12 @@
                         <input class="input" id="4" name="name">
                         <p class="value d-inline"></p>
                         <input type="hidden" name="attribute" value="1">
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(4)">Ändra</button>
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(4)"></i>
                     </li>
                     <li class="list-group-item w-50 lists">Produktkategori:
                         <input class="input" id="5" name="category">
                         <p class="value d-inline"></p>
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(5)">Ändra</button>
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(5)"></i>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
@@ -126,13 +127,13 @@
                         <input class="input" id="6" name="inprice">
                         <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenInPrice" value="InPrice">
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(6)">Ändra</button>
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(6)"></i>
                     </li>
                     <li class="list-group-item w-50 lists" >Varumärke:
                         <input class="input" id="7" name="trademark">
                         <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenTrademark" value="Trademark">
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(7)">Ändra</button>
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(7)"></i>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
@@ -140,13 +141,13 @@
                         <input class="input" id="8" name="outprice">
                         <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenOutPrice" value="OutPrice">
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(8)">Ändra</button>
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(8)"></i>
                     </li>
                     <li class="list-group-item w-50 lists" >Aktiv:
                         <input class="input" id="9" name="activeProduct">
                         <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenActive" value="ActiveProduct">
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(9)">Ändra</button>
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(9)"></i>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
@@ -154,12 +155,12 @@
                         <input class="input" id="10" name="stockbalance">
                         <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenStockBalance" value="StockBalance">
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(10)">Ändra</button>
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(10)"></i>
                     </li>
                     <li class="list-group-item w-50 lists" >Leverantör:
                         <input class="input" id="11" >
                         <p class="value d-inline"></p>
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(11)">Ändra</button>
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(11)"></i>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
@@ -167,7 +168,7 @@
                         <input class="input" id="12" name="maxstockbalance">
                         <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenMax" value="MaxStockBalance">
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(12)">Ändra</button>
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(12)"></i>
                     </li>
                     <li class="list-group-item w-50"></li>
                 </ul>
@@ -176,7 +177,7 @@
                         <input class="input" id="13" name="minstockbalance">
                         <p class="value d-inline"></p>
                         <input type="hidden" name="hiddenMin" value="MinStockBalance">
-                        <button type="button" class="btn btn-primary btn-sm py-0" onclick="showInputs(13)">Ändra</button>
+                        <i type="button" class='fas fa-pencil-alt pen' style='font-size:11px'onclick="showInputs(13)"></i>
 
                     </li>
                     <li class="list-group-item w-50">
@@ -193,7 +194,9 @@
     </div>
 </div>
 
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <script>
+
     let myModal = document.getElementById('myModal')
     let myInput = document.getElementById('myInput')
 

@@ -23,7 +23,7 @@ public  class GetOrders {
 
 
     public  ArrayList<OrderProductBean> getOrder(){
-        ArrayList<OrderProductBean> tempArray = new ArrayList<OrderProductBean>();
+        ArrayList<OrderProductBean> tempArray = null;
         String sql = "SELECT products.Name,orderproducts.ArticleNumber,orderproducts.DfpQuantity,orderproducts.KfpQuantity FROM `orderproducts` INNER JOIN products ON orderproducts.ArticleNumber = products.ArticleNumber";
 
         try {
