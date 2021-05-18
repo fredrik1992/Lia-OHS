@@ -16,10 +16,10 @@ public class sendOrderTask extends TimerTask {
        lastOrderDate = getOrderDate.getDate();
        LocalDate test = LocalDate.now();
 
-
-
+        sendCSV sendcsv = new sendCSV();
+        sendcsv.orderToCSVFile();
             if(currentDate.isAfter(test)	|| currentDate.equals(test) ){
-                sendCSV sendcsv = new sendCSV();
+
                 if (sendcsv.orderToCSVFile()) {
                     System.out.print("order needs to be sent");
                     // GetOrders getOrders = new GetOrders();
