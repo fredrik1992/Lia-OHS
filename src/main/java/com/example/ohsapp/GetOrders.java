@@ -5,40 +5,65 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 
+import javax.xml.transform.Result;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 @Controller
 public  class GetOrders {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-   // @Autowired
-    //private OrderProductRepository repository;
+   private Connection conn;
+    private PreparedStatement stmt = null;
+    private ResultSet rs;
+
+
+
+    public ArrayList<OrderProductBean> sendOrder(){
+        ArrayList <OrderProductBean> orderProductBeans;
+        orderProductBeans = getOrder();
+        return orderProductBeans;
+    }
 
     public  ArrayList<OrderProductBean> getOrder(){
-        ArrayList <OrderProductBean> orderProductBeans = null;
-     System.out.print(getProductFromDatabase(orderProductBeans).size());
-    // System.out.print(repository.findAllByArticleNumEquals("123").size());
+        ArrayList<OrderProductBean> tempArray = new ArrayList<OrderProductBean>();
+        String sql = "SELECT products.Name,orderproducts.ArticleNumber,orderproducts.DfpQuantity,orderproducts.KfpQuantity FROM `orderproducts` INNER JOIN products ON orderproducts.ArticleNumber = products.ArticleNumber";
 
-       return orderProductBeans;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/aob?",
+                    "root", "");
+
+        }catch (Exception e){
+            System.out.print("SQLExepection" + e.getMessage());
+        }
+        try {
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+                String name = rs.getString("Name");
+                String articleNumber = rs.getString("ArticleNumber");
+                String dfp = Integer.toString(rs.getInt("DfpQuantity")) ;
+                String kfp = Integer.toString(rs.getInt("KfpQuantity")) ;
+
+                OrderProductBean orderProductBean = new OrderProductBean(name,articleNumber,dfp,kfp);
+
+
+                tempArray.add(orderProductBean);
+            }
+        }catch (Exception e){
+            System.out.print("wrong in statment");
+        }
 
 
 
+
+
+    return tempArray;
 
     }
 
-   private  ArrayList<OrderProductBean> getProductFromDatabase(ArrayList orderProducts){
-        System.out.print("in get products");
-        String sqlQuery = "SELECT * FROM `orderproducts` WHERE 1 ";
-       jdbcTemplate.query(
-               sqlQuery, new Object[]{},
-               (rs, rowNum) -> new OrderProductBean(rs.getString("ArticleNumber"),
-                       rs.getString("ArticleNumber"),rs.getString("DfpQuantity"),
-                       rs.getString("KfpQuantity "))
-       ).forEach(product ->
-               orderProducts.add(product)
-       );
-       return orderProducts;
-   }
 
 
 
