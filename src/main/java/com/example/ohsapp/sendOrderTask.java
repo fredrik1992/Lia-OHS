@@ -19,11 +19,12 @@ public class sendOrderTask extends TimerTask {
 
 
             if(currentDate.isAfter(test)	|| currentDate.equals(test) ){
-
-                System.out.print("order needs to be sent");
-               // GetOrders getOrders = new GetOrders();
-                //getOrders.sendOrder();
-
+                sendCSV sendcsv = new sendCSV();
+                if (sendcsv.orderToCSVFile()) {
+                    System.out.print("order needs to be sent");
+                    // GetOrders getOrders = new GetOrders();
+                    //getOrders.sendOrder();
+                }
             }
 
 
