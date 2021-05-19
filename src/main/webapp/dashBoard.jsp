@@ -46,6 +46,9 @@
                     <a class="nav-link dash" <%=hideAdminButton%> href="/adminWindow.jsp">Admin</a>
                 </li>
             </ul>
+            <form action="<%=request.getContextPath()%>/Logout" method="post">
+                <button class="btn" id="logoutBtn" type="submit">Log out</button>
+            </form>
         </div>
     </div>
 </nav>
