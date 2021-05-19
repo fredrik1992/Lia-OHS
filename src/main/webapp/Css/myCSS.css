@@ -29,7 +29,6 @@
     display: inline-block;
     float: right;
 }
-
-.penNone{
-    display: none;
+#logoutBtn {
+    color:  #E1F3FA
 }
