@@ -17,9 +17,7 @@
                     <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(0)">Artikelnummer:
                         <h5 id="attributeModalArticle"></h5>
                     </li>
-                    <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(1)">Attribut:
-                        <h5 id="attributeModalAttribute"></h5>
-                    </li>
+
                 </ul>
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(2)">EAN:

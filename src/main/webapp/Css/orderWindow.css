@@ -30,9 +30,12 @@ main{
 .productContainer{
     width: 100%;
     background-color: #FCECDD;
+    height: 30px;
+    border-radius: 2px;
 margin-bottom: 5px;
     display: flex;
     flex-direction: row;
+
 }
 .containerItemName{
     width: 30%;
@@ -46,6 +49,7 @@ margin-bottom: 5px;
     margin-right: 1%;
     position: relative;
     top: 30%;
+    font-size: 16px;
 }
 .articleFormSubmit{
     width: 15%;
@@ -60,8 +64,8 @@ margin-bottom: 5px;
 }
 .itemNameButton{
     position: relative;
-    top: 10%;
-    font-size: 32px;
+    top: 5%;
+    font-size: 16px;
 }
 .inputForm{
     width: 100%;
@@ -80,11 +84,13 @@ margin-bottom: 5px;
 .packageSizeName{
     position: relative;
     top: 30%;
+    font-size: 16px;
 }
 .inputFormItem{
     position: relative;
     height: 70%;
     top: 32%;
+
 }
 .cartItemBox{
     background-color: red;
