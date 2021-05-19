@@ -9,10 +9,12 @@ import java.util.Timer;
 public class OhsappApplication{
 
     public static void main(String[] args) {
-        RunApp runApp = new RunApp();
-        runApp.runThread();
-        System.out.print("in main");
+
+
+
+
         SpringApplication.run(OhsappApplication.class, args);
+        (new Thread(new RunApp())).start();
 
     }
 

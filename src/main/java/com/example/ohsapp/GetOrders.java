@@ -26,12 +26,11 @@ public  class GetOrders {
 
         getmanualOrders();
         getAutomaticOrders();
-        System.out.print(tempArray.size());
         return tempArray;
     }
 private void getmanualOrders (){
     try {
-        createConnection();
+        conn = SqlConnect.getConnection();
         String sql = "SELECT products.Name,orderproducts.ArticleNumber,orderproducts.DfpQuantity,orderproducts.KfpQuantity FROM `orderproducts` INNER JOIN products ON orderproducts.ArticleNumber = products.ArticleNumber WHERE orderproducts.OrderId = ?";
         stmt = conn.prepareStatement(sql);
         stmt.setInt(1, orderId);
@@ -60,7 +59,7 @@ private void getmanualOrders (){
 
     private void getAutomaticOrders(){
         String sql = "SELECT ArticleNumber,StockBalance,MaxStockBalance,MinStockBalance,KfpSize,Name FROM `products` WHERE StockBalance<MinStockBalance";
-        createConnection();
+        conn = SqlConnect.getConnection();
         try {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -86,7 +85,7 @@ private void getmanualOrders (){
 
     private int getOrderId (){
         String sql = "SELECT OrderId FROM `orders` WHERE `OrderId` =(SELECT MAX(OrderId)FROM orders)";
-        createConnection();
+        conn = SqlConnect.getConnection();
         int orderId = 0;
         try {
             stmt = conn.prepareStatement(sql);
@@ -102,21 +101,7 @@ private void getmanualOrders (){
 
     }
 
-    private void  createConnection(){
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/aob?",
-                    "root", "");
 
-        }catch (Exception e){
-            System.out.print("SQLExepection" + e.getMessage());
-        }
-
-
-
-
-
-
-}
 
 }
 
