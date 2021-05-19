@@ -1,5 +1,6 @@
 package com.example.ohsapp.controller;
 
+import com.example.ohsapp.beans.UserBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -37,16 +38,12 @@ public class adminController {
             request.setAttribute("userProcess", "0");
         } else {
             try {
-                String sqlAddUser = "INSERT INTO `users` (EmploymentNumber, Username, Password, Name, Mail, PhoneNumber, IsAdmin) Values(?, ?, ?, ?, ?, ?, ?)";
-                int result = jdbcTemplate.update(sqlAddUser, employmentNumber, username, password, name, mail, phoneNumber, isAdmin);
-
-                if (result > 0) {
+                if (addUserInDatabase(employmentNumber, name, mail, phoneNumber, username, password, isAdmin) > 0) {
                     request.setAttribute("userProcess", "1");
                     System.out.println("A new row has been inserted.");
                 } else {
                     request.setAttribute("userProcess", "2");      // Something went wrong
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -79,6 +76,14 @@ public class adminController {
             }
         }
         redirect(request, response, "adminWindow.jsp");
+    }
+
+
+    private int addUserInDatabase(String employmentNumber, String name, String mail, String phoneNumber, String username, String password, String isAdmin) {
+        UserBean userBean = new UserBean(employmentNumber, name, mail, phoneNumber, username, password, isAdmin);
+        String sqlAddUser = "INSERT INTO `users` (EmploymentNumber, Username, Password, Name, Mail, PhoneNumber, IsAdmin) Values(?, ?, ?, ?, ?, ?, ?)";
+        int result = jdbcTemplate.update(sqlAddUser, employmentNumber, username, password, name, mail, phoneNumber, isAdmin);
+        return result;
     }
 
 

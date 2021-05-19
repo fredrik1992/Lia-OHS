@@ -89,7 +89,7 @@ public class SaveOrdersController {
             if (count ==2){dfp = ordersArray[i]; }
             if (count ==3){kfp = ordersArray[i];}
             if(ordersArray[i].equals("$")){//new object
-                OrderProductBean orderProductBean = new OrderProductBean(name,articleNumber,dfp,kfp);
+                OrderProductBean orderProductBean = new OrderProductBean(name,articleNumber, dfp,kfp);
                 tempArray.add(orderProductBean);
 
                 count =0;
