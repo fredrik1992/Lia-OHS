@@ -14,62 +14,60 @@
             </div>
             <div class="modal-body">
                 <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item w-50 lists" onclick="showInputs(0)">Artikelnummer:
-                        <input class="input" id="0">
+                    <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(0)">Artikelnummer:
+                        <h5 id="attributeModalArticle"></h5>
                     </li>
-                    <li class="list-group-item w-50 lists" onclick="showInputs(1)">Attribut:
-                        <input class="input" id="1">
+
+                </ul>
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(2)">EAN:
+                        <h5 id="attributeModalEan"></h5>
+                    </li>
+                    <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(3)">Avdelning:
+                        <h5 id="attributeModalDepartment"></h5>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item w-50 lists" onclick="showInputs(2)">EAN:
-                        <input class="input" id="2">
+                    <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(4)">Namn:
+                        <h5 id="attributeModalNamn"></h5>
                     </li>
-                    <li class="list-group-item w-50 lists" onclick="showInputs(3)">Avdelning:
-                        <input class="input" id="3">
-                    </li>
-                </ul>
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item w-50 lists" onclick="showInputs(4)">Namn:
-                        <input class="input" id="4">
-                    </li>
-                    <li class="list-group-item w-50 lists"onclick="showInputs(5)">Produktkategori:
-                        <input class="input" id="5">
+                    <li class="list-group-item w-50 lists attributeModalItem"onclick="showInputs(5)">Produktkategori:
+                        <h5 id="attributeModalCategory"></h5>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item w-50 lists" onclick="showInputs(6)">Inpris:
-                        <input class="input" id="6">
+                    <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(6)">Inpris:
+                        <h5 id="attributeModalInPrice"></h5>
                     </li>
-                    <li class="list-group-item w-50 lists" onclick="showInputs(7)">Varumärke:
-                        <input class="input" id="7">
-                    </li>
-                </ul>
-                <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item w-50 lists" onclick="showInputs(8)">Utpris:
-                        <input class="input" id="8">
-                    </li>
-                    <li class="list-group-item w-50 lists" onclick="showInputs(9)">Aktiv:
-                        <input class="input" id="9">
+                    <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(7)">Varumärke:
+                        <h5 id="attributeModalBrand"></h5>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item w-50 lists" onclick="showInputs(10)">Lagersaldo:
-                        <input class="input" id="10">
+                    <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(8)">Utpris:
+                        <h5 id="attributeModalOutPrice"></h5>
                     </li>
-                    <li class="list-group-item w-50 lists" onclick="showInputs(11)">Leverantör:
-                        <input class="input" id="11">
+                    <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(9)">Aktiv:
+                        <h5 id="attributeModalActive"></h5>
                     </li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item w-50 lists"onclick="showInputs(12)">Max i lager:
-                        <input class="input" id="12">
+                    <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(10)">Lagersaldo:
+                        <h5 id="attributeModalBalance"></h5>
+                    </li>
+                    <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(11)">Leverantör:
+                        <h5 id="attributeModalSupplier"></h5>
+                    </li>
+                </ul>
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item w-50 lists attributeModalItem"onclick="showInputs(12)">Max i lager:
+                        <h5 id="attributeModalMaxStock"></h5>
                     </li>
                     <li class="list-group-item w-50"></li>
                 </ul>
                 <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item w-50 lists" onclick="showInputs(13)">Min i lager:
-                        <input class="input" id="13">
+                    <li class="list-group-item w-50 lists attributeModalItem" onclick="showInputs(13)">Min i lager:
+                        <h5 id="attributeModalMinStock"></h5>
                     </li>
                     <li class="list-group-item w-50"><button type="button" class="btn btn-primary btn-sm" >Ta bort vara</button></li>
                 </ul>

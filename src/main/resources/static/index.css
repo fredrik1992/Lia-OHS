@@ -1,0 +1,56 @@
+
+body{
+    background-color: #F6F6F6;
+}
+
+.loginContainer{
+    position: fixed;
+    left: 30%;
+    background-color: #FCECDD;
+    margin-top: 50px;
+    width: 30%;
+    height: 350px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.loginHead{
+    width: 100%;
+    border-radius: 15px;
+    background-color: #F44336;
+    height: 20%;
+}
+.iconContainer{
+    position: relative;
+    margin-left: 38%;
+    top: 40%;
+    background-color: white;
+    border-radius: 100px;
+
+    height: 100px;
+    width: 100px;
+}
+.personIcon{
+
+    width: 50px;
+    height: 50px;
+    margin-left: 25%;
+    margin-top: 15%;
+}
+.loginForm{
+    margin-top: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.loginButton{
+    color: #E1F3FA;
+    background-color: #161D6F;
+    margin-left: 40%;
+}
+
+@media only screen and (max-width: 600px) {
+    .loginContainer{
+        left: 15%;
+    width: 70%;
+        margin-top: 100px;}
+}

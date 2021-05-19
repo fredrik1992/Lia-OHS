@@ -30,28 +30,31 @@ public class GetProductsController {
     @RequestMapping(value = "/getProductsController", method = RequestMethod.GET)
     public void multibleInputHandler(HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "ean") String ean,
                                      @RequestParam(name = "article") String article,
-                                     @RequestParam(name = "productName") String productName) throws ServletException, IOException {
+                                     @RequestParam(name = "productName") String productName,
+                                     @RequestParam(name = "page") String page) throws ServletException, IOException {
 
-        String searchQuery = findRelevantQuery(ean, article, productName);
+        produktListBean.nullList();//resets the list
+        String searchQuery = findRelevantQuery(ean, article, productName); // checks wich input is valid if there is multible
 
-        if (searchQuery != null) {
-
-            addProductsCall(produktListBean, inputDataToUse, searchQuery);
-
-            //return produktListBean.getAllOrders().get(0).getName();//send it back to site
-        }
+        if (searchQuery != null) { addProductsCall(produktListBean, inputDataToUse, searchQuery); }
 
         HttpSession session = request.getSession();
         session.setAttribute("test", produktListBean);
-        RequestDispatcher rd = request.getRequestDispatcher("orderWindow.jsp");
-        rd.forward(request, response);
+
+        if (page.equals("searchWindow")) {
+            RequestDispatcher rd = request.getRequestDispatcher("searchWindow.jsp");
+            rd.forward(request, response);
+        } else {
+            RequestDispatcher rd = request.getRequestDispatcher("orderWindow.jsp");
+            rd.forward(request, response);
+        }
 
 
     }
 
 
     private String findRelevantQuery(String ean, String article, String productName) {
-        //checks wich Querry to use
+
         if (ean.length() != 0) {//checks wich input has been filled
             inputDataToUse = ean;
             String sqlQuerry = "SELECT * FROM products WHERE EANNumber = ?";
@@ -82,32 +85,15 @@ public class GetProductsController {
 
         jdbcTemplate.query(
                 sqlQuerry, new Object[]{inputData},
-                (rs, rowNum) -> new ProduktBean(rs.getString("ArticleNumber"), rs.getString("Name"), // maby check mapping here ?
-                        rs.getString("EANNumber"), rs.getString("Trademark"), rs.getInt("InPrice"),
-                        rs.getInt("OutPrice"))
+                (rs, rowNum) -> new ProduktBean(rs.getString("ArticleNumber"), rs.getString("EANNumber"),
+                        rs.getString("Trademark"), rs.getDouble("InPrice"), rs.getDouble("OutPrice"),
+                        rs.getInt("StockBalance"), rs.getInt("MaxStockBalance"), rs.getInt("MinStockBalance"),
+                        rs.getInt("KfpSize"), rs.getInt("DfpSize"), rs.getString("Department"),
+                        rs.getString("Category"), rs.getInt("ActiveProduct"),
+                        rs.getString("Name"), rs.getInt("SupplierId"))
         ).forEach(product ->
                 produktListBean.addProduct(product)
         );
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

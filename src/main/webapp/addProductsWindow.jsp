@@ -17,8 +17,8 @@
     <!--Fontawesome CDN-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href="myCSS.css">
-    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="Css/myCSS.css">
+    <link href="Css/style.css" rel="stylesheet">
 
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -35,12 +35,20 @@
     <title>Lägg till vara</title>
 </head>
 <body>
+<%
+    // New location to be redirected
+    if(session.getAttribute("user") ==null){
+        String site = new String("index.html");
+        response.setStatus(response.SC_MOVED_TEMPORARILY);
+        response.setHeader("Location", site);
+    }
 
+%>
 <header>
     <jsp:include page="dashBoard.jsp"></jsp:include>
 </header>
 
-<main class="container" id="addProductContainer">
+<main class="container" id="addContainer">
     <%
         String addProductProcess = (String) request.getAttribute("addProductProcess");
         String alertClassName = "alert-danger";
@@ -56,7 +64,7 @@
                 alertMessage = "Det finns redan en produkt med detta EAN eller Artikel nummer.";
             }
 
-            out.println( "<div class=\"alert " + alertClassName +" d-flex align-items-center\" role = \"alert\">");
+            out.println("<div class=\"alert " + alertClassName + " d-flex align-items-center\" role = \"alert\">");
             out.println("<svg class=\"bi flex-shrink-0 me-2\" width = \"24\" height = \"24\" >");
             out.println("<use xlink:href=\"" + alertIcon + "\" />");
             out.println("</svg>");
@@ -84,27 +92,27 @@
         </div>
         <div class="row align-items-center">
             <div class="col">
-                <input type="text" name="inprice" class="form-control" placeholder="Inpris" required>
+                <input type="number" name="inprice" class="form-control" placeholder="Inpris" required>
             </div>
             <div class="col">
-                <input type="text" name="outprice" class="form-control" placeholder="Utpris" required>
+                <input type="number" name="outprice" class="form-control" placeholder="Utpris" required>
             </div>
             <div class="col">
-                <input type="text" name="kfpsize" class="form-control" placeholder="KRP Storlek" required>
+                <input type="number" name="kfpsize" class="form-control" placeholder="KRP Storlek" required>
             </div>
             <div class="col">
-                <input type="text" name="dfpsize" class="form-control" placeholder="DFP Storlek" required>
+                <input type="number" name="dfpsize" class="form-control" placeholder="DFP Storlek" required>
             </div>
         </div>
         <div class="row align-items-center">
             <div class="col">
-                <input type="text" name="minstockbalance" class="form-control" placeholder="Min i lager" required>
+                <input type="number" name="minstockbalance" class="form-control" placeholder="Min i lager" required>
             </div>
             <div class="col">
-                <input type="text" name="maxstockbalance" class="form-control" placeholder="Max i lager" required>
+                <input type="number" name="maxstockbalance" class="form-control" placeholder="Max i lager" required>
             </div>
             <div class="col">
-                <input type="text" name="stockbalance" class="form-control" placeholder="Antal i lager" required>
+                <input type="number" name="stockbalance" class="form-control" placeholder="Antal i lager" required>
             </div>
             <div class="col">
                 <input type="text" name="department" class="form-control" placeholder="Avdelning" required>
@@ -119,10 +127,14 @@
                         data-bs-toggle="dropdown" aria-expanded="false">Attribut
                 </button>
                 <ul class="dropdown-menu">
-                    <li><label class="checkbox">18+ <input type="checkbox" name="18plus"></label></li>
-                    <li><label class="checkbox">Pant 1kr <input type="checkbox" name="pant1kr"></label></li>
-                    <li><label class="checkbox">Pant 2kr <input type="checkbox" name="pant2kr"></label></li>
-                    <li><label class="checkbox">Larmad <input type="checkbox" name="larmad"></label></li>
+                    <li><label class="form-check-label">18+ <input type="checkbox" class="form-check-input"
+                                                                   name="18plus"></label></li>
+                    <li><label class="form-check-label">Pant 1kr <input type="checkbox" class="form-check-input"
+                                                                        name="pant1kr"></label></li>
+                    <li><label class="form-check-label">Pant 2kr <input type="checkbox" class="form-check-input"
+                                                                        name="pant2kr"></label></li>
+                    <li><label class="form-check-label">Larmad <input type="checkbox" class="form-check-input"
+                                                                      name="larmad"></label></li>
                 </ul>
             </div>
             <div class="col">
@@ -137,7 +149,7 @@
             </div>
             <div class="col">
                 <div class="float-end">
-                    <input type="submit" value="Lägg till" class="btn btn-primary" id="addProductButton"/>
+                    <input type="submit" value="Lägg till" class="btn btn-primary" id="addButton"/>
                 </div>
             </div>
         </div>

@@ -11,6 +11,10 @@
     color: #161D6F !important;
 
 }
+.myBtn{
+    background-color: #161D6F !important;
+    color: #E1F3FA !important;
+}
 
 .input{
     display: none;
@@ -19,4 +23,12 @@
 
 .displayInput{
     display: inline-block;
+    float: right;
+}
+.pen{
+    display: inline-block;
+    float: right;
+}
+#logoutBtn {
+    color:  #E1F3FA
 }

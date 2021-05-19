@@ -4,39 +4,43 @@
 
 
 
+
 <!-- Modal -->
-<div class="modal fade " id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+
+<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header dash">
-                <h5 class="modal-title" id="staticBackdropLabel">Korg</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Kundvagn</h5>
+
             </div>
-            <div class="modal-body" id="shoppingCartBody">
+            <div class="modal-body" id="modal-body-cart">
+                ...
+            </div>
+            <div class="modal-footer">
+                <form action="<%=request.getContextPath()%>/SaveOrdersController" method="post">
+                    <input type="hidden" name="allOrders" id="123" value="test">
+
+                    <button class="btn btn-outline-primary" onclick="saveOrder()" type="submit">Skicka order</button>
+                </form>
+
 
             </div>
         </div>
-        <button onclick="callTest()">Slutför Köp</button> <!-- need to call a function that sens the cart list to server-->
+
+
+
     </div>
 
+
+
+
 </div>
-<button onclick="callTest()">Slutför Köp</button>
-<script>
-    let myModal = document.getElementById('myModal')
-    let myInput = document.getElementById('myInput')
-
-    myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
-    })
-
-    function showInputs (number){
-        let input = document.getElementById(number)
-        if (input.getAttribute("class") === "input"){
-            input.setAttribute("class", "displayInput")
-            console.log(number)
-        } else{input.setAttribute("class", "input")}
-    }
 
 
 
-</script>
+
+
+
+
+
