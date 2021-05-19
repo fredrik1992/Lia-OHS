@@ -22,7 +22,7 @@ public class sendCSV {
 
     public boolean  orderToCSVFile() {
         orderlist = getOrders.getOrder();
-
+        System.out.print("order list size is " + orderlist.size());
         if (orderlist!=null){
             System.out.println(orderlist);
             String SAMPLE_CSV_FILE = "./src/main/resources/sample.csv";

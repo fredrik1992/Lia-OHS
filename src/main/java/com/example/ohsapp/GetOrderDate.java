@@ -16,11 +16,11 @@ public class GetOrderDate {
     public Date getDate(){
 
         Date date = null;
-        String sql = "SELECT Date FROM `orders` WHERE `OrderId` =(SELECT MAX(OrderId)FROM orders w)";
-        createConnection();
+        String sql = "SELECT Date FROM `orders` WHERE `OrderId` =(SELECT MAX(OrderId)FROM orders)";
+        conn = SqlConnect.getConnection();
 
         try {
-            int orderId = getOrderId();
+
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             while (rs.next()){
@@ -36,30 +36,7 @@ public class GetOrderDate {
         return date;
     }
 
-    public int getOrderId (){
-        String sql = "SELECT OrderId FROM `orders` WHERE `OrderId` =(SELECT MAX(OrderId)FROM orders)";
-        createConnection();
-        int orderId = 0;
-        try {
-            stmt = conn.prepareStatement(sql);
-            rs = stmt.executeQuery();
-            while (rs.next()){
-                orderId = rs.getInt("OrderId");
-            }
-        }catch (Exception e){
-            System.out.print("cant connect to database");
-        }
-        return orderId;
 
-    }
 
-    public void  createConnection(){
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/aob?",
-                    "root", "");
 
-        }catch (Exception e){
-            System.out.print("SQLExepection" + e.getMessage());
-        }
-    }
 }
