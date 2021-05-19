@@ -35,6 +35,7 @@ public class SendOrderTask extends TimerTask {
                 System.out.print("time to make an order");
                 sendCSV sendCSV = new sendCSV();
                 if(sendCSV.orderToCSVFile()){
+                    System.out.print("order sucsessful");
                     createNewOrderId();
                 }
 
@@ -56,7 +57,7 @@ public class SendOrderTask extends TimerTask {
 
     }
     public void createNewOrderId(){
-        String sql = "INSERT INTO `orders` (`OrderId`, `OrdererName`, `OrdererMail`, `OrdererPhoneNumber`, `Date`) VALUES (NULL, 'ica', 'ica@.se', '07045', ?)";
+        String sql = "INSERT INTO `orders` (`OrderId`, `OrdererName`, `OrdererMail`, `OrdererPhoneNumber`, `Date`) VALUES (NULL, 'ica', 'javaganget@gmail.com', '07045', ?)";
         conn = SqlConnect.getConnection();
         String lastOrderDateToString = lastOrderDate.toString();
         lastOrderDateToString = addDays(lastOrderDateToString); // adds 2 days

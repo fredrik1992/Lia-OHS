@@ -45,6 +45,9 @@
                 <li class="nav-item">
                     <a class="nav-link dash" <%=hideAdminButton%> href="/adminWindow.jsp">Admin</a>
                 </li>
+                <li>
+
+                </li>
             </ul>
         </div>
     </div>

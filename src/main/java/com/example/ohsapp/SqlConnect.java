@@ -9,7 +9,9 @@ public class SqlConnect {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/aob?",
-                    "root", "lady2005");
+                    "root", "");
+
+            //jdbc:mysql://localhost:3306/aob?user=root&password=lady2005
 
         }catch (Exception e){
             System.out.print("SQLExepection" + e.getMessage());

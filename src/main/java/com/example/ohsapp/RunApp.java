@@ -15,7 +15,7 @@ public class RunApp implements Runnable{
             try {
                 SendOrderTask sendOrderTask = new SendOrderTask();
                 sendOrderTask.run();
-                Thread.sleep(1800000);  // add 1800000 for every 30 minutes
+                Thread.sleep(1000);  // add 1800000 for every 30 minutes
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
