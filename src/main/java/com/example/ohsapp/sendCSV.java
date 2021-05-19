@@ -25,7 +25,7 @@ public class sendCSV {
 
         if (orderlist!=null){
             System.out.println(orderlist);
-            String SAMPLE_CSV_FILE = "./sample.csv";
+            String SAMPLE_CSV_FILE = "./src/main/resources/sample.csv";
             try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(SAMPLE_CSV_FILE));
                  CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
                          .withHeader("ProductName", "ArticleNumber", "DFP", "KFP"));){
