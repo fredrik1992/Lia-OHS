@@ -11,6 +11,10 @@
     color: #161D6F !important;
 
 }
+.myBtn{
+    background-color: #161D6F !important;
+    color: #E1F3FA !important;
+}
 
 .input{
     display: none;
@@ -24,4 +28,8 @@
 .pen{
     display: inline-block;
     float: right;
+}
+
+.penNone{
+    display: none;
 }
